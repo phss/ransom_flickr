@@ -10,9 +10,9 @@ end
 def getimg(message)
   flickr = RansomFlickr.new("flickr_key.yaml")
   html = ""
-  message.each_char do |letter|
+  message.split("").each do |letter|
     if letter != " "
-      html += "<img src=\"#{flickr.get(flickr, letter).source('Square')}\" />"
+      html += "<img src=\"#{flickr.get(letter).source('Square')}\" />"
     else
       html += "<br/>"
     end
