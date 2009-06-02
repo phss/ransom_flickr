@@ -1,1 +1,10 @@
-Flickr ransom note generator.
+Hack and slash project to generate a ransom note using flickr images. It requires a flickr application key.
+
+To run:
+- ruby ransom.rb
+
+Required Gems:
+- flickr
+- sinatra
+- haml
+- sass
