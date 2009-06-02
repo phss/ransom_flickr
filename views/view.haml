@@ -4,9 +4,8 @@
     %meta{"http-equiv" => "Content-Type", :content=>"text/html; charset=UTF-8"}
     %link{:rel => 'stylesheet', :type =>'text/css', :href => 'ransom_flickr.css' }
   %body
-    .message{:align => "center"}
-      - @photo_urls.each do |url|
-        - if url
-          %img{:src => url}
-        - else
-          %br
+    .message
+      - @photo_urls.each do |word|
+        - word.each do |letter_url|
+          %img{:src => letter_url}
+        %span#space
