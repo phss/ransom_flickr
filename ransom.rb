@@ -4,8 +4,13 @@ require 'sinatra'
 require "haml"
 require "sass"
 
-get '/' do
-  message = "Ransom is the practice of holding a prisoner to extort money or property to secure their release, or it can refer to the sum of money involved."
+get "/" do
+  haml :new
+end
+
+post '/view' do
+  # message = "Ransom is the practice of holding a prisoner to extort money or property to secure their release, or it can refer to the sum of money involved."
+  message = params[:note]
   @photo_urls = RansomFlickr.new("flickr_key.yaml").get_photo_urls(message)
   haml :view
 end
