@@ -6,6 +6,7 @@
   %body
     .message
       - @photo_urls.each do |word|
-        - word.each do |letter_url|
-          %img{:src => letter_url}
+        %span#word
+          - word.each do |letter_url|
+            %img{:src => letter_url}
         %span#space

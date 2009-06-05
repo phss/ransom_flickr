@@ -17,17 +17,24 @@ class RansomFlickr
       ":" => "colon"
     }
   end
+
+	def preload
+		fetcher = lambda { |char| get_url_for(char.to_s) }
+		'a'.upto('z', &fetcher)
+	  0.upto(9, &fetcher)
+		@punctuation_map.keys.each(&fetcher)
+	end
   
   def get_photo_urls(message)
-    message.split(/\s/).map do |word|
+    message.downcase.split(/\s/).map do |word|
       word.split("").inject([]) do |photo_word, letter|
         photo_word << get_url_for(letter)
       end.compact
     end
   end
   
-  private
-  
+	private
+
   def get_url_for(char)
     unless @url_cache.has_key?(char)
       if char.match(/[A-Za-z]/)
@@ -45,7 +52,7 @@ class RansomFlickr
   end
   
   def fetch(char, group)
-    @flickr.photos(:tags => "#{group}, #{char}", :tag_mode => "all", :per_page => "10").map { |photo| photo.source("Square") }
+    @flickr.photos(:tags => "#{group}, #{char}", :tag_mode => "all", :per_page => "20").map { |photo| photo.source("Square") }
   end
   
 end
