@@ -6,12 +6,13 @@ require "sass"
 require "sequel"
 
 configure do
-#	DB = Sequel.sqlite
-#	DB.create_table :blah do
-#		primary_key :id
-#		String :name
-#		Float :number
-#	end
+	DB = Sequel.sqlite
+	DB.create_table :notes do # TODO persist on a real DB
+		primary_key :id
+		String :link
+		String :text
+	end
+
 	RF = RansomFlickr.new("flickr_key.yaml")
 	puts "Preloading images"
 	RF.preload
@@ -22,20 +23,20 @@ get "/" do
   haml :new
 end
 
-#get "/addblah" do
-#	DB[:blah].insert(:name => "weee", :number => 42)
-#end
+get "/list" do
+	notes = DB[:notes].collect { |note| note[:text] }
+	"Blah: #{DB[:notes].count.to_s}<br/>#{notes}"
+end
 
-#get "/blah" do
-#	DB[:blah].insert(:name => "weee", :number => 42)
-#	"Blah: #{DB[:blah].count.to_s}"
-#end
+post '/generate' do
+  @note = params[:note]
+  @photo_urls = RF.get_photo_urls(@note)
+  haml :generate
+end
 
-post '/view' do
-  # message = "Ransom is the practice of holding a prisoner to extort money or property to secure their release, or it can refer to the sum of money involved."
-  message = params[:note]
-  @photo_urls = RF.get_photo_urls(message)
-  haml :view
+post '/save' do
+	DB[:notes].insert(:link => "something", :text => params[:note])
+	"Saved"
 end
 
 get '/ransom_flickr.css' do

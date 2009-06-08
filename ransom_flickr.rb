@@ -52,7 +52,7 @@ class RansomFlickr
   end
   
   def fetch(char, group)
-    @flickr.photos(:tags => "#{group}, #{char}", :tag_mode => "all", :per_page => "20").map { |photo| photo.source("Square") }
+    @flickr.photos(:tags => "#{group}, #{char}", :tag_mode => "all", :per_page => "1").map { |photo| photo.source("Square") }
   end
   
 end

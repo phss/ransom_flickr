@@ -10,3 +10,7 @@
           - word.each do |letter_url|
             %img{:src => letter_url}
         %span#space
+      %br
+      %form{:action => "save", :method => "post"}
+        %input{:type =>'hidden', :name => 'note', :value => @note }
+        %input{:type => 'submit', :value => 'Save'}
