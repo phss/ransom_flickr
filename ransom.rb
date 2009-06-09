@@ -35,8 +35,15 @@ post '/generate' do
 end
 
 post '/save' do
-	DB[:notes].insert(:link => "something", :text => params[:note])
-	"Saved"
+	@link = "something" # TODO generate a link
+	DB[:notes].insert(:link => @link, :text => params[:note])
+	haml :saved
+end
+
+get '/view/:link' do
+  note = DB[:notes].filter(:link => params[:link]).first[:text]
+	@photo_urls = RF.get_photo_urls(note)
+  haml :view
 end
 
 get '/ransom_flickr.css' do
