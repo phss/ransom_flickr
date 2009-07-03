@@ -1,5 +1,4 @@
-require "rubygems"
-require "flickr"
+require "lib/vendor/moonpxi-flickr/lib/flickr"
 require "yaml"
  
 class RansomFlickr

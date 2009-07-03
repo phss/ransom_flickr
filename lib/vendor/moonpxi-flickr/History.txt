@@ -1,0 +1,59 @@
+== 1.0.8 2009-01-25
+* 2 minor enhancements
+ * Refactored initialization of PhotoCollection so can be instantiated from response returned by photosets.getPhotos
+ * Added photosets.getPhotos. Returns PhotoCollection
+
+== 1.0.7 2008-11-26
+* 1 major enhancement
+ * When a collection of photos is fetched (e.g. by Flickr#search), a PhotoCollection object is now returned, a type of array, which allows easy access to the pagination information returned by Flickr (e.g. total items, pages, etc). Previously this info was lost
+* Minor enhancements:
+ * Refactored parsing of response when getting info about photo (public API is not changed). 
+ * All returned info is now parsed and stored (previously only some attributes were)
+ * A record is kept of whether info has been previously fetched from Flickr (avoids unnecessary extra calls)
+ * Improved User#getInfo. No longer makes API call for pretty_url (which was in addition to main getInfo call) or photos_url
+* Bugfixes
+ * Fixed Photo#source not to make unnecessary API call
+ * Fixed User#url not to make unnecessary API call
+
+== 1.0.6 2008-07-30
+* Bugfixes:
+  * fixed Flickr#photos when used for searching
+  * fixed Flickr::Photo#url to not use usernames (if the user changes their username, the url will wrong)
+  * fixed Flickr#related_tags
+  * Flickr::Photo#to_s was making unnecessary API calls
+  * fixed 'test' Rake task
+  * fixed 'gem' Rake task
+* Minor enhancements:
+  * added Flickr#search as an alias for Flickr#photos in its search mode
+  * added Flickr#recent as an alias for Flickr#photos for recent photos
+  * added Flickr::Photo#pretty_url for the URL that includes a username if present
+  * added Flickr::Photo#size_url which is like url except 'Medium' works the same as other sizes
+  * allow lowercase ('medium') and symbol (:medium) forms for sizes
+  * internal code cleanup
+
+== 1.0.5 2008-05-12
+
+* 1 major change:
+  * Updated and refactored Flickr::Group class and Flickr#groups method to work with current Flickr API. Flickr#groups now searches for given group, rather than groups.getActiveList (which no longer exists as Flickr API call)
+* Minor enhancements:
+  * Tweaked internals so new client instance isn't created each time new object (e.g. photo, user) is created
+  * Improved test coverage
+  
+== 1.0.4 2008-05-11
+
+* 1 major enhancement:
+  * Added authentication facility as per current Flickr API
+* 3 minor enhancements:
+  * Improved test suite
+  * Improved API for creating Flickr objects (old one still works)
+  * Protected methods that are only used internally (e.g. request, request_url)
+
+== 1.0.3 2008-04-18
+
+* Various bugfixes:
+  * User instantiation was broken (wrong number of params passed)
+  * Instantiating photos failed in several places if single photo returned
+  * Photosets#getInfo would always fail as the parameter name should be photoset_id, not photosets_id
+  * Removed call to flickr.people.getOnlineList in Flickr#users as that call is no longer in the Flickr API
+* Performance improvements:
+  * Url and image source uri now generated without a call to the Flickr API, as per the Flickr API docs

@@ -1,9 +1,11 @@
 require 'rubygems'
-require "ransom_flickr"
+require "lib/vendor/moonpxi-flickr/lib/flickr"
 require 'sinatra'
 require "haml"
 require "sass"
 require "sequel"
+require 'ransom_flickr'
+require 'Twitterize'
 
 configure do
 	DB = Sequel.sqlite
@@ -30,7 +32,8 @@ end
 
 post '/generate' do
   @note = params[:note]
-  @photo_urls = RF.get_photo_urls(@note)
+  twitter_text = Twitterize.search(@note)[0] #get the first occurence
+  @photo_urls = RF.get_photo_urls(twitter_text)
   haml :generate
 end
 
@@ -41,6 +44,7 @@ post '/save' do
 end
 
 get '/view/:link' do
+	
   note = DB[:notes].filter(:link => params[:link]).first[:text]
 	@photo_urls = RF.get_photo_urls(note)
   haml :view
