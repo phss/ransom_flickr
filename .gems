@@ -1,4 +1,6 @@
 sinatra
-flickraw
+sequel
+sqlite3
 haml
-sass
+flickraw
+
