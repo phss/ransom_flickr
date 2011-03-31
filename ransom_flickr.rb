@@ -4,10 +4,8 @@ require "yaml"
 class RansomFlickr
  
   def initialize(config_file)
-    config = YAML.load_file(config_file)
-    
-    FlickRaw.api_key=config["key"]
-    FlickRaw.shared_secret=config["secret"]
+    FlickRaw.api_key="7d48fc98af876770b002b02d5092b598"
+    FlickRaw.shared_secret="19b8714e005c19ee"
     
     @url_cache = Hash.new
     @punctuation_map = {
