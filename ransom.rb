@@ -20,6 +20,17 @@ configure do
 	puts "Finished preloading"	
 end
 
+helpers do
+  def random_size
+    40 + rand(20)
+  end
+  
+  def random_rotation
+    angle = rand(20) - 10
+    %w{webkit moz o}.inject("") { |style, browser| style + "-#{browser}-transform: rotate(#{angle}deg);\n"  }
+  end
+end
+
 get "/" do
   haml :new
 end

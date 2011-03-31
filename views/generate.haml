@@ -8,7 +8,7 @@
       - @photo_urls.each do |word|
         %span#word
           - word.each do |letter_url|
-            %img{:src => letter_url}
+            %img{:src => letter_url, :width => random_size, :height => random_size, :style => random_rotation}
         %span#space
       %br
       %form{:action => "save", :method => "post"}
