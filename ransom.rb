@@ -3,7 +3,7 @@ require 'sinatra'
 require "haml"
 require "sass"
 require "sequel"
-require 'ransom_flickr'
+require 'lib/ransom_flickr'
 require 'Twitterize'
 
 configure do
