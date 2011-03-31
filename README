@@ -4,7 +4,7 @@ To run:
 - ruby ransom.rb
 
 Required Gems:
-- flickr
+- flickraw
 - sinatra
 - haml
 - sass

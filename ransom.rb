@@ -1,5 +1,4 @@
 require 'rubygems'
-require "lib/vendor/moonpxi-flickr/lib/flickr"
 require 'sinatra'
 require "haml"
 require "sass"
@@ -17,7 +16,7 @@ configure do
 
 	RF = RansomFlickr.new("flickr_key.yaml")
 	puts "Preloading images"
-	RF.preload
+  RF.preload
 	puts "Finished preloading"	
 end
 
@@ -32,8 +31,9 @@ end
 
 post '/generate' do
   @note = params[:note]
-  twitter_text = Twitterize.search(@note)[0] #get the first occurence
-  @photo_urls = RF.get_photo_urls(twitter_text)
+  puts @note
+  @photo_urls = RF.get_photo_urls(@note)
+  puts @photo_urls  
   haml :generate
 end
 
@@ -44,7 +44,6 @@ post '/save' do
 end
 
 get '/view/:link' do
-	
   note = DB[:notes].filter(:link => params[:link]).first[:text]
 	@photo_urls = RF.get_photo_urls(note)
   haml :view

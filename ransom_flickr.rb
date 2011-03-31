@@ -1,10 +1,14 @@
-require "lib/vendor/moonpxi-flickr/lib/flickr"
+require "flickraw"
 require "yaml"
  
 class RansomFlickr
  
   def initialize(config_file)
-    @flickr = Flickr.new(YAML.load_file(config_file)["key"])
+    config = YAML.load_file(config_file)
+    
+    FlickRaw.api_key=config["key"]
+    FlickRaw.shared_secret=config["secret"]
+    
     @url_cache = Hash.new
     @punctuation_map = {
       "!" => "exclamation",
@@ -51,7 +55,8 @@ class RansomFlickr
   end
   
   def fetch(char, group)
-    @flickr.photos(:tags => "#{group}, #{char}", :tag_mode => "all", :per_page => "10").map { |photo| photo.source("Square") }
+    photos = flickr.photos.search :tags => "#{group}, #{char}", :tag_mode => "all", :per_page => 10, :extras => "url_sq"
+    photos.collect { |photo| photo.url_sq }
   end
   
 end
