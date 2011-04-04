@@ -16,7 +16,7 @@ configure do
 
 	RF = RansomFlickr.new("flickr_key.yaml")
 	puts "Preloading images"
-  RF.preload
+#  RF.preload
 	puts "Finished preloading"	
 end
 

@@ -19,6 +19,11 @@ class RansomFlickr
       "-" => "dash",
       ":" => "colon"
     }
+    @groups = {
+      :oneletter, group_id_from("One Letter"),
+      :onedigit, group_id_from("One Digit"),
+      :punctuation, group_id_from("Punctuation"),
+    }
   end
 
 	def preload
@@ -38,14 +43,18 @@ class RansomFlickr
   
 	private
 
+  def group_id_from(group) 
+    flickr.groups.search(:text => group).find { |g| g.name == group }.nsid
+  end
+
   def get_url_for(char)
     unless @url_cache.has_key?(char)
       if char.match(/[A-Za-z]/)
-        @url_cache[char] = fetch(char, "oneletter")
+        @url_cache[char] = fetch(char, @groups[:oneletter])
       elsif char.match(/[0-9]/)
-        @url_cache[char] = fetch(char, "onedigit")
+        @url_cache[char] = fetch(char, @groups[:onedigit])
       elsif @punctuation_map.has_key?(char)
-        @url_cache[char] = fetch(@punctuation_map[char], "punctuation")
+        @url_cache[char] = fetch(@punctuation_map[char], @groups[:punctuation])
       else
         @url_cache[char] = [nil]
       end
@@ -54,8 +63,8 @@ class RansomFlickr
     return urls[rand(urls.size)]
   end
   
-  def fetch(char, group)
-    photos = flickr.photos.search :tags => "#{group}, #{char}", :tag_mode => "all", :per_page => 10, :extras => "url_sq"
+  def fetch(char, group_id)
+    photos = flickr.photos.search :group_id => group_id, :tags => char, :per_page => 1, :extras => "url_sq"
     photos.collect { |photo| photo.url_sq }
   end
   
