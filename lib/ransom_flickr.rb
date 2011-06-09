@@ -20,9 +20,9 @@ class RansomFlickr
       ":" => "colon"
     }
     @groups = {
-      :oneletter, group_id_from("One Letter"),
-      :onedigit, group_id_from("One Digit"),
-      :punctuation, group_id_from("Punctuation"),
+      :oneletter => group_id_from("One Letter"),
+      :onedigit => group_id_from("One Digit"),
+      :punctuation => group_id_from("Punctuation")
     }
   end
 
