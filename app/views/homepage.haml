@@ -1,1 +1,21 @@
-%textarea{:id => "note"}
+%html
+  %head
+    %title Ransom Flickr
+    %meta{"http-equiv" => "Content-Type", :content=>"text/html; charset=UTF-8"}
+    %link{:rel => 'stylesheet', :type =>'text/css', :href => 'ransom.css' }  
+
+  %body
+    .header
+      %h2 Make your own  
+      %h1 Ransom Letter
+
+    .write
+      %p Type your letter
+
+      
+      %textarea{:id => "note"}
+
+    .generate
+      %button Generate
+
+    .result
