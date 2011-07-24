@@ -12,6 +12,6 @@ Then /^I am not allowed to enter the admin area$/ do
   page.should have_content "Access Denied"
 end
 
-Then /^I see the admin page$/ do
-  page.should have_content "Admin"
+Then /^I can see a selection of all letters to browse$/ do
+  pending # express the regexp above with the code you wish you had
 end

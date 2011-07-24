@@ -7,6 +7,6 @@ Feature: Adding letters
     When I visit the admin page with the wrong admin credentials
     Then I am not allowed to enter the admin area
 
-  Scenario: Successful login (temporary)
+  Scenario: Allow browsing of all letters
     When I visit the admin page with the admin credentials
-    Then I see the admin page
+    Then I can see a selection of all letters to browse
