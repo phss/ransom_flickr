@@ -13,5 +13,7 @@ Then /^I am not allowed to enter the admin area$/ do
 end
 
 Then /^I can see a selection of all letters to browse$/ do
-  pending # express the regexp above with the code you wish you had
+  ("A".."Z").each do |letter| 
+    page.should have_link(letter, :href => "/admin/browse/#{letter}")
+  end
 end
