@@ -6,16 +6,13 @@
 
   %body
     .header
-      %h2 Make your own  
-      %h1 Ransom Letter
+      %img{:src => "images/logo.png", :alt => "Make your own ransom note"}
 
     .write
       %p Type your letter
 
-      
-      %textarea{:id => "note"}
-
-    .generate
-      %button Generate
+      %form
+        %textarea{:id => "note"}
+        %button Generate
 
     .result
