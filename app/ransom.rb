@@ -1,7 +1,7 @@
 require "rubygems"
 require "sinatra"
 require "haml"
-require File.dirname(__FILE__) + "/../lib/helpers"
+require_relative "../lib/helpers"
 
 helpers Authentication
 
