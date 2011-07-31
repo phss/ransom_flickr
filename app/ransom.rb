@@ -12,7 +12,7 @@ end
 
 get "/admin" do
   protected!
-  "Admin"
+  haml :admin
 end
 
 get "/ransom.css" do

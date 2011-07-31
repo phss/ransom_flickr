@@ -1,0 +1,15 @@
+%html
+  %head
+    %title Ransom Flickr
+    %meta{"http-equiv" => "Content-Type", :content=>"text/html; charset=UTF-8"}
+    %link{:rel => 'stylesheet', :type =>'text/css', :href => 'ransom.css' }  
+
+  %body
+    .header
+      %img{:src => "images/logo.png", :alt => "Make your own ransom note"}
+
+    .browse
+      %h1 Browse
+
+      - ("a".."z").each do |letter|
+        %a{:href => "/admin/browse/#{letter}"}= letter.upcase

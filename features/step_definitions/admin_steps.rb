@@ -14,6 +14,6 @@ end
 
 Then /^I can see a selection of all letters to browse$/ do
   ("A".."Z").each do |letter| 
-    page.should have_link(letter, :href => "/admin/browse/#{letter}")
+    page.should have_link(letter, :href => "/admin/browse/#{letter.downcase}")
   end
 end
