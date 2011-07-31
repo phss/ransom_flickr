@@ -1,6 +1,7 @@
 require "rubygems"
 require "sinatra"
 require "haml"
+require "sass"
 require_relative "../lib/helpers"
 
 helpers Authentication
