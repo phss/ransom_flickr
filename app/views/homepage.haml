@@ -9,10 +9,11 @@
       %img{:src => "images/logo.png", :alt => "Make your own ransom note"}
 
     .write
-      %p Type your letter
+      %p Want to blackmail your boss?
 
       %form
-        %textarea{:id => "note"}
+        %textarea{:id => "note", :cols => 108, :rows => 20}
+        %br
         %button Generate
 
     .result
