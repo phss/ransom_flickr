@@ -1,19 +1,9 @@
-%html
-  %head
-    %title Ransom Flickr
-    %meta{"http-equiv" => "Content-Type", :content=>"text/html; charset=UTF-8"}
-    %link{:rel => 'stylesheet', :type =>'text/css', :href => 'ransom.css' }  
+.write
+  %p Want to blackmail your boss? What about declaring your love for that special one you are stalking? A regular prank or an unusual communication method? Say no more, write your own letter in the style of a ransom note:
 
-  %body
-    .header
-      %img{:src => "images/logo.png", :alt => "Make your own ransom note"}
+  %form
+    %textarea{:id => "note", :cols => 108, :rows => 20}
+    %br
+    %button Generate
 
-    .write
-      %p Want to blackmail your boss?
-
-      %form
-        %textarea{:id => "note", :cols => 108, :rows => 20}
-        %br
-        %button Generate
-
-    .result
+.result
