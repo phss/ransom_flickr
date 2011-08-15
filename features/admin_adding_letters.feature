@@ -12,7 +12,7 @@ Feature: Adding letters
     Then I can see a selection of all letters to browse
 
   Scenario: Browsing for new letters
-    Given a Flicker service with the following entries
+    Given an Image service with the following entries
       | Letter | Image                                       |
       | A      | http://fakeflicker/should_not_see_this.jpg  |
       | B      | http://fakeflicker/first_b_image.jpg        |
@@ -21,5 +21,5 @@ Feature: Adding letters
      And I browse letter "B"
     Then I should see images
       | Image                                  |
-      | http://fakeflicker/first_b_image.jp    |
+      | http://fakeflicker/first_b_image.jpg   |
       | http://fakeflicker/second_b_image.jpg  |

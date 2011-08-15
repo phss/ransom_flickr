@@ -17,3 +17,18 @@ Then /^I can see a selection of all letters to browse$/ do
     page.should have_link(letter, :href => "/admin/browse/#{letter.downcase}")
   end
 end
+
+Given /^an Image service with the following entries$/ do |table|
+  set :image_service, FakeImageService.new(table.hashes)
+end
+
+When /^I browse letter "([^"]*)"$/ do |letter|
+  visit "/admin/browser/#{letter}"
+end
+
+Then /^I should see images$/ do |table|
+  table.hashes.each do |attr|
+    image_link = attr[:Image]
+    page.should have_xpath("//img[@src=\"#{image_link}\"]")
+  end
+end
