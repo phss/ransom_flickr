@@ -15,6 +15,12 @@ get "/admin" do
   haml :admin
 end
 
+get "/admin/browse/:character" do
+  protected!
+  @image_urls = settings.image_service.browse(params[:character])
+  haml :browse_character
+end
+
 get "/ransom.css" do
    content_type "text/css", :charset => "utf-8"
    sass :ransom

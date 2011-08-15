@@ -23,7 +23,7 @@ Given /^an Image service with the following entries$/ do |table|
 end
 
 When /^I browse letter "([^"]*)"$/ do |letter|
-  visit "/admin/browser/#{letter}"
+  visit "/admin/browse/#{letter}"
 end
 
 Then /^I should see images$/ do |table|
