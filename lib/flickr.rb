@@ -1,0 +1,1 @@
+require File.dirname(__FILE__) + "/flickr/flickr_image_service"

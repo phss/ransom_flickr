@@ -3,6 +3,7 @@ require "sinatra"
 require "haml"
 require "sass"
 require_relative "../lib/helpers"
+require_relative "../lib/flickr"
 
 helpers Authentication
 
