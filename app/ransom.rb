@@ -2,6 +2,7 @@ require "rubygems"
 require "sinatra"
 require "haml"
 require "sass"
+require "yaml"
 require_relative "../lib/helpers"
 require_relative "../lib/flickr"
 
