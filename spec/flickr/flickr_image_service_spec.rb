@@ -10,8 +10,8 @@ describe FlickrImageService do
   it "should browse images from letter group for a given character" do
     expected_photo_urls = ["url1", "url2", "url3"]
     flickr_photos = expected_photo_urls.collect { |url| photo(url) }
-    
-    @flickr_wrapper.should_receive(:search).with("a", :group => "oneletter") { flickr_photos }
+
+    @flickr_wrapper.should_receive(:search).with(:tag => "a", :group => "One Letter") { flickr_photos }
 
     @service.browse("a").should == expected_photo_urls
   end

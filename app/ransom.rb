@@ -7,6 +7,10 @@ require_relative "../lib/flickr"
 
 helpers Authentication
 
+configure do
+  set :image_service, nil
+end
+
 get "/" do
  haml :homepage
 end
