@@ -7,8 +7,8 @@ require_relative "../lib/flickr"
 
 helpers Authentication
 
-configure do
-  set :image_service, nil
+configure :production, :development do
+  set :image_service, FlickrImageService.new(FlickWrapper.new(YAML.load_file("flickr_key.yaml")))
 end
 
 get "/" do

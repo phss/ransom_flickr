@@ -6,4 +6,6 @@ begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations
 require 'rack/test'
 require 'capybara/cucumber'
 
+ENV['RACK_ENV'] = 'test'
+
 Capybara.app = Sinatra::Application
