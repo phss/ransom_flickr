@@ -12,7 +12,7 @@ class FlickWrapper
 
     group_id = group_id_from options[:group]
 
-    return flickr.photos.search :group_id => group_id, :tags => options[:tag], :extras => "url_sq"
+    return flickr.photos.search :group_id => group_id, :tags => options[:tag], :extras => "url_sq", :per_page => 20
   end
 
   private

@@ -1,2 +1,6 @@
-- @image_urls.each do |url|
-  %img{:src => url}
+.browse
+
+  %h1 Results
+
+  - @image_urls.each do |url|
+    %img{:src => url}
