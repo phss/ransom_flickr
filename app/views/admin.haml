@@ -5,7 +5,8 @@
     %a{:href => "/admin/browse/#{letter}"}= letter.upcase
 
   - if @image_urls
-    %h1 Results
+    #to_add
+      %h1 Results
 
-    - @image_urls.each do |url|
-      %img{:src => url}
+      - @image_urls.each do |url|
+        %img{:src => url}

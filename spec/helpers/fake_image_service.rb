@@ -5,7 +5,7 @@ class FakeImageService
   end
 
   def browse(character)
-    @images_hash.find_all { |image| image[:Letter] == character }.collect { |image| image[:Image] }
+    @images_hash.find_all { |image| image[:Character] == character }.collect { |image| image[:Image] }
   end
 
 end
