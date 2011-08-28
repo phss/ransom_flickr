@@ -48,6 +48,10 @@ Given /^an Image service with the following entries$/ do |table|
   set :image_service, FakeImageService.new(table.hashes)
 end
 
+Given /^no saved entries$/ do
+  DB.collection("images").remove()
+end
+
 Given /^the following saved entries$/ do |table|
   DB.collection("images").remove()
   table.hashes.each { |image| DB.collection("images").save(image) }

@@ -38,7 +38,8 @@ Feature: Adding letters
       | http://fakeflicker/image_a2.jpg   |
 
   Scenario: Adding a letter
-    Given an Image service with the following entries
+    Given no saved entries
+     And an Image service with the following entries
       | Character | Image                                       | Image ID |
       | A         | http://fakeflicker/should_not_see_this.jpg  | 1234     |
       | B         | http://fakeflicker/first_b_image.jpg        | 2345     |
