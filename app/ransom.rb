@@ -24,7 +24,7 @@ end
 get "/admin/browse/:character" do
   protected!
   @image_urls = settings.image_service.browse(params[:character])
-  haml :browse_character
+  haml :admin
 end
 
 get "/ransom.css" do
