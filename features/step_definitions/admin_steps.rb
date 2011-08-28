@@ -38,6 +38,10 @@ def should_have_image(category, link)
   page.should have_xpath("//div[@id='#{category}']/img[@src=\"#{link}\"]")
 end
 
+When /^I click to save image "([^"]*)"$/ do |image_id|
+  pending
+end
+
 # External services step (i.e. image service and DB)
 
 Given /^an Image service with the following entries$/ do |table|
