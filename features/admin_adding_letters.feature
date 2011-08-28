@@ -13,10 +13,10 @@ Feature: Adding letters
 
   Scenario: Browsing for new letters
     Given an Image service with the following entries
-      | Letter | Image                                       |
-      | A      | http://fakeflicker/should_not_see_this.jpg  |
-      | B      | http://fakeflicker/first_b_image.jpg        |
-      | B      | http://fakeflicker/second_b_image.jpg       |
+      | Letter | Image                                       | Image ID |
+      | A      | http://fakeflicker/should_not_see_this.jpg  | 1234     |
+      | B      | http://fakeflicker/first_b_image.jpg        | 2345     |
+      | B      | http://fakeflicker/second_b_image.jpg       | 3456     |
     When I visit the admin page with the admin credentials
      And I browse letter "B"
     Then I should see images
