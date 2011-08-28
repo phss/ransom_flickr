@@ -4,12 +4,13 @@
   - ("a".."z").each do |letter|
     %a{:href => "/admin/browse/#{letter}"}= letter.upcase
 
-  - if @image_urls
+  - if @to_add_images
     #to_add
       %h1 To Add
 
-      - @image_urls.each do |url|
-        %img{:src => url}
+      - @to_add_images.each do |image|
+        %a{:id => "image_#{image.image_id}", :href => "/admin/save/#{params[:character]}/#{image.image_id}"}
+          %img{:src => image.url}
 
   - if @saved_images
     #saved

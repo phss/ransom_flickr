@@ -26,7 +26,19 @@ end
 
 get "/admin/browse/:character" do
   protected!
-  @image_urls = settings.image_service.browse(params[:character])
+  @to_add_images = settings.image_service.browse(params[:character])
+  @saved_images = DB.collection("images").find({:character => params[:character]})
+  haml :admin
+end
+
+get "/admin/save/:character/:image_id" do
+  protected!
+  
+  image = settings.image_service.find_image(params[:image_id])
+
+  DB.collection("images").save({ "character" => params[:character], "image_url" => image.url, "image_id" => image.image_id })
+
+  @to_add_images = settings.image_service.browse(params[:character])
   @saved_images = DB.collection("images").find({:character => params[:character]})
   haml :admin
 end

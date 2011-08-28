@@ -35,11 +35,11 @@ Then /^I should see saved images$/ do |table|
 end
 
 def should_have_image(category, link)
-  page.should have_xpath("//div[@id='#{category}']/img[@src=\"#{link}\"]")
+  page.should have_xpath("//div[@id='#{category}']//img[@src=\"#{link}\"]")
 end
 
 When /^I click to save image "([^"]*)"$/ do |image_id|
-  pending
+  click_link("image_#{image_id}")
 end
 
 # External services step (i.e. image service and DB)
