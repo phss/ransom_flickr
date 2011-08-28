@@ -3,10 +3,13 @@ require "sinatra"
 require "haml"
 require "sass"
 require "yaml"
+require "mongo"
 require_relative "../lib/helpers"
 require_relative "../lib/flickr"
 
 helpers Authentication
+
+DB = Mongo::Connection.new.db("ransom")
 
 configure :production, :development do
   set :image_service, FlickrImageService.new(FlickWrapper.new(YAML.load_file("flickr_key.yaml")))

@@ -45,6 +45,5 @@ Given /^an Image service with the following entries$/ do |table|
 end
 
 Given /^the following saved entries$/ do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  table.hashes.each { |image| DB.collection("images").save(image) }
 end
