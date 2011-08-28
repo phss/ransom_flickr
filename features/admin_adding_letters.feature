@@ -26,7 +26,7 @@ Feature: Adding letters
 
   Scenario: Browsing saved image
     Given the following saved entries
-      | character | image                           | image_id |
+      | character | image_url                       | image_id |
       | A         | http://fakeflicker/image_a1.jpg | 1234     |
       | A         | http://fakeflicker/image_a2.jpg | 2234     |
       | B         | http://fakeflicker/image_b.jpg  | 2345     |

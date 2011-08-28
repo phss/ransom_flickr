@@ -8,8 +8,4 @@ require 'capybara/cucumber'
 
 ENV['RACK_ENV'] = 'test'
 
-before do
-  DB.collection("images").remove()
-end
-
 Capybara.app = Sinatra::Application

@@ -10,3 +10,10 @@
 
       - @image_urls.each do |url|
         %img{:src => url}
+
+  - if @saved_images
+    #saved
+      %h1 Saved
+
+      - @saved_images.each do |image|
+        %img{:src => image["image_url"]}        

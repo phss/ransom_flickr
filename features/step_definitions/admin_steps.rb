@@ -45,5 +45,6 @@ Given /^an Image service with the following entries$/ do |table|
 end
 
 Given /^the following saved entries$/ do |table|
+  DB.collection("images").remove()
   table.hashes.each { |image| DB.collection("images").save(image) }
 end

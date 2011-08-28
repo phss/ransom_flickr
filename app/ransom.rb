@@ -27,6 +27,7 @@ end
 get "/admin/browse/:character" do
   protected!
   @image_urls = settings.image_service.browse(params[:character])
+  @saved_images = DB.collection("images").find({:character => params[:character]})
   haml :admin
 end
 
