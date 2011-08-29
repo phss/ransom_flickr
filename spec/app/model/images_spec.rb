@@ -10,13 +10,13 @@ describe "Images" do
 
   describe "(saving images)" do
     it "should fail to save image if has no underyling DB collection" do
-      expect { Images.save("a", FlickrImage.new("id", "url")) }.to raise_error(StandardError, "No underlying DB collection")
+      expect { Images.save("a", Image.new("id", "url")) }.to raise_error(StandardError, "No underlying DB collection")
     end  
 
     it "should save image" do
       Images.db_collection = @mongo_collection
 
-      Images.save("x", FlickrImage.new("some id", "some url"))
+      Images.save("x", Image.new("some id", "some url"))
 
       @mongo_collection.find().should have_elements([{"character" => "x", "image_id" => "some id", "image_url" => "some url"}])
     end
@@ -34,9 +34,9 @@ describe "Images" do
     end
 
     it "should return images for search character" do      
-      image_a_1 = FlickrImage.new("a1", "some url a1")
-      image_a_2 = FlickrImage.new("a2", "some url a2")
-      image_b_1 = FlickrImage.new("b1", "some url b1")
+      image_a_1 = Image.new("a1", "some url a1")
+      image_a_2 = Image.new("a2", "some url a2")
+      image_b_1 = Image.new("b1", "some url b1")
 
       Images.db_collection = @mongo_collection
       Images.save("a", image_a_1)
