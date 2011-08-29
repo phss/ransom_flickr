@@ -10,4 +10,13 @@ class Image
     Image.new(db_hash["image_id"], db_hash["image_url"], db_hash["character"])
   end
 
+  def with_character(character)
+    @character = character
+    self
+  end
+
+  def ==(another_image)
+    @image_id == another_image.image_id
+  end
+
 end

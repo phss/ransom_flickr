@@ -7,12 +7,13 @@ class Images
     @@collection = collection
   end
   
-  def self.save(character, image)
-    collection.save({ "character" => character, "image_url" => image.url, "image_id" => image.image_id })
+  def self.save(image)
+    raise "Missing character" unless image.character
+    collection.save("character" => image.character, "image_url" => image.url, "image_id" => image.image_id)
   end
 
   def self.find_for(character)
-    collection.find(:character => character).to_a
+    collection.find(:character => character).to_a.collect { |image_hash| Image.from_db(image_hash) }
   end
 
   private

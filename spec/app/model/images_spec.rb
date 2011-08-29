@@ -10,13 +10,17 @@ describe "Images" do
 
   describe "(saving images)" do
     it "should fail to save image if has no underyling DB collection" do
-      expect { Images.save("a", Image.new("id", "url")) }.to raise_error(StandardError, "No underlying DB collection")
+      expect { Images.save(Image.new("id", "url", "a")) }.to raise_error(StandardError, "No underlying DB collection")
     end  
+
+    it "should fail if image doesn't have a character" do
+      expect { Images.save(Image.new("id", "url")) }.to raise_error(StandardError, "Missing character")
+    end
 
     it "should save image" do
       Images.db_collection = @mongo_collection
 
-      Images.save("x", Image.new("some id", "some url"))
+      Images.save(Image.new("some id", "some url", "x"))
 
       @mongo_collection.find().should have_elements([{"character" => "x", "image_id" => "some id", "image_url" => "some url"}])
     end
@@ -34,17 +38,16 @@ describe "Images" do
     end
 
     it "should return images for search character" do      
-      image_a_1 = Image.new("a1", "some url a1")
-      image_a_2 = Image.new("a2", "some url a2")
-      image_b_1 = Image.new("b1", "some url b1")
+      image_a_1 = Image.new("a1", "some url a1", "a")
+      image_a_2 = Image.new("a2", "some url a2", "a")
+      image_b_1 = Image.new("b1", "some url b1", "b")
 
       Images.db_collection = @mongo_collection
-      Images.save("a", image_a_1)
-      Images.save("a", image_a_2)
-      Images.save("b", image_b_1)
+      Images.save(image_a_1)
+      Images.save(image_a_2)
+      Images.save(image_b_1)
 
-      Images.find_for("a").should have_elements([{"character" => "a", "image_id" => "a1", "image_url" => "some url a1"},
-                                                 {"character" => "a", "image_id" => "a2", "image_url" => "some url a2"}])
+      Images.find_for("a").should =~ [image_a_1, image_a_2]
     end
   end
 
