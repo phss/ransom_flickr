@@ -8,19 +8,20 @@ describe FlickrImageService do
   end
 
   it "should browse images from letter group for a given character" do
-    expected_photo_urls = ["url1", "url2", "url3"]
-    flickr_photos = expected_photo_urls.collect { |url| photo(url) }
+    flickr_photos = [ photo("id1", "url1"), photo("id2", "url2"), photo("id3", "url3")]
 
     @flickr_wrapper.should_receive(:search).with(:tag => "a", :group => "One Letter") { flickr_photos }
 
-    @service.browse("a").should == expected_photo_urls
+    @service.browse("a").should == [ Image.new("id1", "url1", "a"), 
+                                     Image.new("id2", "url2", "a"), 
+                                     Image.new("id3", "url3", "a") ]
   end
 
 
-  StubPhoto = Struct.new(:url_sq)
+  StubPhoto = Struct.new(:id, :url_sq)
 
-  def photo(url)
-    StubPhoto.new(url)
+  def photo(id, url)
+    StubPhoto.new(id, url)
   end
 
 end
