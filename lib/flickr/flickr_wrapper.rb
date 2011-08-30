@@ -16,6 +16,10 @@ class FlickWrapper
     return flickr.photos.search({ :group_id => group_id, :tags => options[:tag] }.merge(default_options))
   end
 
+  def fetch(image_id)
+    flickr.photos.getInfo :photo_id => image_id
+  end
+
   private
 
   def group_id_from(group) 
