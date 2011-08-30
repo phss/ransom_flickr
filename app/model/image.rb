@@ -10,6 +10,10 @@ class Image
     Image.new(db_hash["image_id"], db_hash["image_url"], db_hash["character"])
   end
 
+  def self.from_flickr(flickr_photo)
+    Image.new(flickr_photo.id, flickr_photo.url_sq)
+  end
+
   def with_character(character)
     @character = character
     self

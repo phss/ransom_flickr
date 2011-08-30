@@ -17,6 +17,11 @@ describe FlickrImageService do
                                      Image.new("id3", "url3", "a") ]
   end
 
+  it "should fetch image for given id" do
+    @flickr_wrapper.should_receive(:fetch).with("imageid") { photo("imageid", "some url") }
+
+    @service.find_image("imageid").should == Image.new("imageid", "some url")
+  end
 
   StubPhoto = Struct.new(:id, :url_sq)
 

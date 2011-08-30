@@ -10,6 +10,16 @@ describe "Image" do
     image.image_id.should == "blah123"
   end
 
+  it "should be constructed from FlickrImage" do
+    StubFlickrPhoto = Struct.new(:id, :url_sq)
+    
+    image = Image.from_flickr(StubFlickrPhoto.new("blah321", "diff url"))
+
+    image.character.should be_nil
+    image.url.should == "diff url"
+    image.image_id.should == "blah321"
+  end
+
   it "should add character to image" do
     image = Image.new("blah456", "another url").with_character("y")
 
