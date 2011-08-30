@@ -10,7 +10,7 @@ class FlickrImageService
   end
 
   def find_image(image_id)
-    Image.from_flickr(@flickr_wrapper.fetch(image_id))
+    return Image.new(image_id, @flickr_wrapper.fetch_url(image_id))
   end
 
 end

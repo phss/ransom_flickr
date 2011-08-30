@@ -18,15 +18,21 @@ describe FlickrImageService do
   end
 
   it "should fetch image for given id" do
-    @flickr_wrapper.should_receive(:fetch).with("imageid") { photo("imageid", "some url") }
+    @flickr_wrapper.should_receive(:fetch_url).with("imageid") { "some url" }
 
-    @service.find_image("imageid").should == Image.new("imageid", "some url")
+    @service.find_image("imageid").should match_all_attributes_of(Image.new("imageid", "some url"))
   end
 
   StubPhoto = Struct.new(:id, :url_sq)
 
   def photo(id, url)
     StubPhoto.new(id, url)
+  end
+
+  RSpec::Matchers.define :match_all_attributes_of do |expected|
+    match do |actual|
+      expected.image_id == actual.image_id && expected.url == actual.url && expected.character == actual.character
+    end
   end
 
 end

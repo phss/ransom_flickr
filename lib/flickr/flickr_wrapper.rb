@@ -16,8 +16,9 @@ class FlickWrapper
     return flickr.photos.search({ :group_id => group_id, :tags => options[:tag] }.merge(default_options))
   end
 
-  def fetch(image_id)
-    flickr.photos.getInfo :photo_id => image_id
+  def fetch_url(image_id)
+    photo_sizes = flickr.photos.getSizes :photo_id => image_id
+    return photo_sizes.find { |photo| photo.label == "Square" }.source
   end
 
   private
