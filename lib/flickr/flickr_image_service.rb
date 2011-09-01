@@ -4,8 +4,8 @@ class FlickrImageService
     @flickr_wrapper = flickr_wrapper
   end
 
-  def browse(character)
-    flickr_photos = @flickr_wrapper.search(:tag => character, :group => "One Letter")
+  def browse(character, page = 1)
+    flickr_photos = @flickr_wrapper.search(:tag => character, :group => "One Letter", :page => page)
     return flickr_photos.collect { |photo| Image.from_flickr(photo).with_character(character) }
   end
 

@@ -13,7 +13,7 @@ class FlickWrapper
     default_options = { :extras => "url_sq", :per_page => 20, :license => "1,2,4,5,7" }
     group_id = group_id_from options[:group]
 
-    return flickr.photos.search({ :group_id => group_id, :tags => options[:tag] }.merge(default_options))
+    return flickr.photos.search({ :group_id => group_id, :tags => options[:tag], :page => options[:page] }.merge(default_options))
   end
 
   def fetch_url(image_id)

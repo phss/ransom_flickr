@@ -10,11 +10,19 @@ describe FlickrImageService do
   it "should browse images from letter group for a given character" do
     flickr_photos = [ photo("id1", "url1"), photo("id2", "url2"), photo("id3", "url3")]
 
-    @flickr_wrapper.should_receive(:search).with(:tag => "a", :group => "One Letter") { flickr_photos }
+    @flickr_wrapper.should_receive(:search).with(:tag => "a", :group => "One Letter", :page => 1) { flickr_photos }
 
     @service.browse("a").should == [ Image.new("id1", "url1", "a"), 
                                      Image.new("id2", "url2", "a"), 
                                      Image.new("id3", "url3", "a") ]
+  end
+
+  it "should browse images from a given page" do
+    flickr_photos = [ photo("id", "url") ]
+
+    @flickr_wrapper.should_receive(:search).with(:tag => "a", :group => "One Letter", :page => 42) { flickr_photos }
+
+    @service.browse("a", 42).should == [ Image.new("id", "url", "a") ]
   end
 
   it "should fetch image for given id" do

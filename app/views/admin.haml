@@ -12,6 +12,11 @@
         %a{:id => "image_#{image.image_id}", :href => "/admin/save/#{params[:character]}/#{image.image_id}"}
           %img{:src => image.url}
 
+      #paging
+        %a{:href => "/admin/browse/#{params[:character]}?service_page=#{@service_page-1}" } previous
+        = "Page #{@service_page}"
+        %a{:href => "/admin/browse/#{params[:character]}?service_page=#{@service_page+1}" } next
+
   - if @saved_images
     #saved
       %h1 Saved

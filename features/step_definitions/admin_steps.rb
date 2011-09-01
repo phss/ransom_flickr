@@ -26,7 +26,11 @@ When /^I browse letter "([^"]*)"$/ do |letter|
   visit "/admin/browse/#{letter}"
 end
 
-Then /^I should see images from service$/ do |table|
+When /^I go to the next page$/ do
+  click_link("next")
+end
+
+Then /^I should only see images from service$/ do |table|
   table.hashes.each { |attr| should_have_image "to_add", attr[:Image] }
 end
 
