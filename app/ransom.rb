@@ -42,7 +42,7 @@ get "/admin/save/:character/:image_id" do
   
   Images.save(settings.image_service.find_image(params[:image_id]).with_character(params[:character]))
 
-  redirect "/admin/browse/#{params[:character]}"
+  redirect "/admin/browse/#{params[:character]}?service_page=#{params[:service_page]}"
 end
 
 
