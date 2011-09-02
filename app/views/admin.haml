@@ -9,13 +9,13 @@
       %h1 To Add
 
       - @to_add_images.each do |image|
-        %a{:id => "image_#{image.image_id}", :href => link_with_pagination("/admin/save/#{params[:character]}/#{image.image_id}", @service_page)}
+        %a{:id => "image_#{image.image_id}", :href => link_with_pagination("/admin/save/#{params[:character]}/#{image.image_id}")}
           %img{:src => image.url}
 
       #paging
-        %a{:href => "/admin/browse/#{params[:character]}?service_page=#{@service_page-1}" } previous
+        %a{:href => "/admin/browse/#{params[:character]}?service_page=#{current_page-1}" } previous
         = "page #{@service_page}"
-        %a{:href => "/admin/browse/#{params[:character]}?service_page=#{@service_page+1}" } next
+        %a{:href => "/admin/browse/#{params[:character]}?service_page=#{current_page+1}" } next
 
   - if @saved_images
     #saved

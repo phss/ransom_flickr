@@ -30,8 +30,7 @@ end
 get "/admin/browse/:character" do
   protected!
 
-  @service_page = (params[:service_page] || 1).to_i
-  @to_add_images = settings.image_service.browse(params[:character], @service_page)
+  @to_add_images = settings.image_service.browse(params[:character], current_page)
   @saved_images = Images.find_for(params[:character])
 
   haml :admin

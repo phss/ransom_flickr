@@ -2,13 +2,13 @@ require File.dirname(__FILE__) + "/../spec_helper"
 
 describe "Pagination" do
 
-  it "should generate link with pagination info with page number from params" do
-    pagination_module_with_params(:service_page => 2).link_with_pagination("url").should == "url?service_page=2"
+  it "should show current page from params" do
+    pagination_module_with_params(:service_page => 103).current_page.should == 103
   end
 
-  it "should generate link with pagination info with supplied page number" do
-    pagination_module_with_params(:service_page => 2).link_with_pagination("url", 3).should == "url?service_page=3"
-  end
+  it "should generate link with pagination info with page number from params" do
+    pagination_module_with_params(:service_page => 2).link_with_pagination("url").should == "url?service_page=2"
+  end    
 
   FakeModule = Struct.new(:params)
 

@@ -1,5 +1,10 @@
 module Pagination
-  def link_with_pagination(url, page_number=params[:service_page])
-    url + "?service_page=#{page_number}"
+
+  def current_page
+    (params[:service_page] || 1).to_i
+  end
+
+  def link_with_pagination(url)
+    url + "?service_page=#{current_page}"
   end
 end
