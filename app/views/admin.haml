@@ -13,9 +13,7 @@
           %img{:src => image.url}
 
       #paging
-        %a{:href => "/admin/browse/#{params[:character]}?service_page=#{current_page-1}" } previous
-        = "page #{@service_page}"
-        %a{:href => "/admin/browse/#{params[:character]}?service_page=#{current_page+1}" } next
+        = render_pagination("/admin/browse/#{params[:character]}")
 
   - if @saved_images
     #saved
