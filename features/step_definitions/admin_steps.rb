@@ -38,6 +38,12 @@ Then /^I should see saved images$/ do |table|
   table.hashes.each { |attr| should_have_image "saved", attr[:Image] }
 end
 
+Then /^I should see status message "([^"]*)"$/ do |expected_message|
+  pending
+  page.should have_content(expected_message)
+end
+
+
 def should_have_image(category, link)
   page.should have_xpath("//div[@id='#{category}']//img[@src=\"#{link}\"]")
 end

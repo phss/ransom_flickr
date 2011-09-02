@@ -66,6 +66,7 @@ Feature: Adding letters
     Then I should see saved images
       | Image                                  |
       | http://fakeflicker/first_b_image.jpg   |
+     And I should see status message "Successfully saved new image."
   
      
      
