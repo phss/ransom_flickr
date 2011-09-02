@@ -9,7 +9,7 @@
       %h1 To Add
 
       - @to_add_images.each do |image|
-        %a{:id => "image_#{image.image_id}", :href => "/admin/save/#{params[:character]}/#{image.image_id}?service_page=#{@service_page}"}
+        %a{:id => "image_#{image.image_id}", :href => link_with_pagination("/admin/save/#{params[:character]}/#{image.image_id}", @service_page)}
           %img{:src => image.url}
 
       #paging

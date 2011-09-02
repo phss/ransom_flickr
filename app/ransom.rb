@@ -8,7 +8,7 @@ require_relative "model/image"
 require_relative "../lib/helpers"
 require_relative "../lib/flickr"
 
-helpers Authentication
+helpers Authentication, Pagination
 
 DB = Mongo::Connection.new.db("ransom")
 Images.db_collection = DB.collection("images")
@@ -42,7 +42,7 @@ get "/admin/save/:character/:image_id" do
   
   Images.save(settings.image_service.find_image(params[:image_id]).with_character(params[:character]))
 
-  redirect "/admin/browse/#{params[:character]}?service_page=#{params[:service_page]}"
+  redirect link_with_pagination("/admin/browse/#{params[:character]}")
 end
 
 
