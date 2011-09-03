@@ -53,6 +53,28 @@ Feature: Adding letters
       | http://fakeflicker/image_a1.jpg   |
       | http://fakeflicker/image_a2.jpg   |
 
+  Scenario: Highlighting saved images
+    Given an Image service with the following entries
+      | Character | Image                                       | Image ID |
+      | B         | http://fakeflicker/not_saved_1.jpg          | 1234     |
+      | B         | http://fakeflicker/saved_2.jpg              | 2345     |
+      | B         | http://fakeflicker/saved_3.jpg              | 3456     |
+      | B         | http://fakeflicker/not_saved_4.jpg          | 4567     |
+      | B         | http://fakeflicker/not_saved_5.jpg          | 5678     |
+     And the following saved entries
+      | character | image_url                       | image_id |
+      | B         | http://fakeflicker/saved_2.jpg  | 2345     |
+      | B         | http://fakeflicker/saved_3.jpg  | 3456     |
+     And I visit the admin page with the admin credentials
+    When I browse letter "B"
+    Then I should only see images from service
+      | Image                                       | Saved |
+      | http://fakeflicker/not_saved_1.jpg          | false |
+      | http://fakeflicker/saved_2.jpg              | true  |
+      | http://fakeflicker/saved_3.jpg              | true  |
+      | http://fakeflicker/not_saved_4.jpg          | false |
+      | http://fakeflicker/not_saved_5.jpg          | false |
+
   Scenario: Adding a letter
     Given no saved entries
      And an Image service with the following entries

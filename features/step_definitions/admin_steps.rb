@@ -31,7 +31,13 @@ When /^I go to the next page$/ do
 end
 
 Then /^I should only see images from service$/ do |table|
-  table.hashes.each { |attr| should_have_image "to_add", attr[:Image] }
+  table.hashes.each do |attr| 
+    if attr[:Saved] && attr[:Saved] == "true"
+      should_have_image_with_saved_highlight "to_add", attr[:Image]
+    else
+      should_have_image "to_add", attr[:Image]
+    end
+  end
 end
 
 Then /^I should see saved images$/ do |table|
@@ -42,9 +48,12 @@ Then /^I should see status message "([^"]*)"$/ do |expected_message|
   page.should have_content(expected_message)
 end
 
-
 def should_have_image(category, link)
   page.should have_xpath("//div[@id='#{category}']//img[@src=\"#{link}\"]")
+end
+
+def should_have_image_with_saved_highlight(category, link)
+  page.should have_xpath("//div[@id='#{category}']//img[@src=\"#{link}\" @class=\"image_saved\"]")
 end
 
 When /^I click to save image "([^"]*)"$/ do |image_id|
