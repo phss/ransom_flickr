@@ -39,7 +39,6 @@ Then /^I should see saved images$/ do |table|
 end
 
 Then /^I should see status message "([^"]*)"$/ do |expected_message|
-  pending
   page.should have_content(expected_message)
 end
 

@@ -3,6 +3,7 @@ require "sinatra"
 require "haml"
 require "sass"
 require "yaml"
+require "rack-flash"
 require_relative "model/images"
 require_relative "model/image"
 require_relative "../lib/helpers"
@@ -16,6 +17,9 @@ Images.db_collection = DB.collection("images")
 configure :production, :development do
   set :image_service, FlickrImageService.new(FlickWrapper.new(YAML.load_file("flickr_key.yaml")))
 end
+
+enable :sessions
+use Rack::Flash
 
 get "/" do
  haml :homepage
@@ -40,6 +44,7 @@ get "/admin/save/:character/:image_id" do
   protected!
   
   Images.save(settings.image_service.find_image(params[:image_id]).with_character(params[:character]))
+  flash[:save_status] = "Successfully saved new image"
 
   redirect link_with_pagination("/admin/browse/#{params[:character]}")
 end

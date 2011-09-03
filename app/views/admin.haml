@@ -19,5 +19,7 @@
     #saved
       %h1 Saved
 
+      #save_status= flash[:save_status]
+
       - @saved_images.each do |image|
         %img{:src => image.url}        
