@@ -53,7 +53,7 @@ def should_have_image(category, link)
 end
 
 def should_have_image_with_saved_highlight(category, link)
-  page.should have_xpath("//div[@id='#{category}']//img[@src=\"#{link}\" @class=\"image_saved\"]")
+  page.should have_xpath("//div[@id='#{category}']//img[@src=\"#{link}\" and @class=\"image_saved\"]")
 end
 
 When /^I click to save image "([^"]*)"$/ do |image_id|

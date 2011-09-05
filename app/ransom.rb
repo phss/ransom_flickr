@@ -14,12 +14,12 @@ helpers Authentication, Pagination
 DB = Mongo::Connection.new.db("ransom")
 Images.db_collection = DB.collection("images")
 
+enable :sessions
+use Rack::Flash
+
 configure :production, :development do
   set :image_service, FlickrImageService.new(FlickWrapper.new(YAML.load_file("flickr_key.yaml")))
 end
-
-enable :sessions
-use Rack::Flash
 
 get "/" do
  haml :homepage
@@ -29,6 +29,10 @@ end
 get "/admin" do
   protected!
   haml :admin
+end
+
+def previously_saved(image)
+  DB.collection("images").find(:image_id => image.image_id).has_next?
 end
 
 get "/admin/browse/:character" do
