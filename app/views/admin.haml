@@ -10,10 +10,7 @@
 
       - @to_add_images.each do |image|
         %a{:id => "image_#{image.image_id}", :href => link_with_pagination("/admin/save/#{params[:character]}/#{image.image_id}")}
-          - if previously_saved(image)
-            %img{:src => image.url, :class => "image_saved"}
-          - else          
-            %img{:src => image.url}
+          %img{:src => image.url, :class => Images.saved?(image) ? "image_saved" : ""}
 
       #paging
         = render_pagination("/admin/browse/#{params[:character]}")

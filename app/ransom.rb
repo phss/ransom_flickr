@@ -31,10 +31,6 @@ get "/admin" do
   haml :admin
 end
 
-def previously_saved(image)
-  DB.collection("images").find(:image_id => image.image_id).has_next?
-end
-
 get "/admin/browse/:character" do
   protected!
 

@@ -51,6 +51,26 @@ describe "Images" do
     end
   end
 
+  describe "(previously saved images)" do
+    it "should fail to find images if has no underyling DB collection" do
+      expect { Images.saved?(nil) }.to raise_error(StandardError, "No underlying DB collection")
+    end
+
+    it "should verify image is not already saved" do
+      Images.db_collection = @mongo_collection
+      
+      Images.saved?(Image.new("a1", "some url a1", "a")).should == false
+    end
+
+    it "should verify image is already saved" do
+      image = Image.new("a1", "some url a1", "a")
+      Images.db_collection = @mongo_collection
+      Images.save(image)
+
+      Images.saved?(image).should == true
+    end
+  end
+
   RSpec::Matchers.define :have_elements do |expected_elements|
     match do |actual_elements|
       actual_elements.to_a.each do |actual|
