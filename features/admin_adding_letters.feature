@@ -1,9 +1,9 @@
-Feature: Adding letters
+Feature: Adding characters
   In order to allow users to generate notes
   As a site administrator
-  I want to be able to add letters from Flickr
+  I want to be able to add characters from Flickr
 
-  Scenario: Adding a letter
+  Scenario: Adding a character
     Given no saved entries
      And an Image service with the following entries
       | Character | Image                                       | Image ID |
@@ -11,7 +11,7 @@ Feature: Adding letters
       | B         | http://fakeflicker/first_b_image.jpg        | 2345     |
       | B         | http://fakeflicker/second_b_image.jpg       | 3456     |
      And I visit the admin page with the admin credentials
-     And I browse letter "B"
+     And I browse character "B"
     When I click to save image "2345"
     Then I should see saved images
       | Image                                  |
@@ -25,7 +25,7 @@ Feature: Adding letters
       | A         | http://fakeflicker/image_a2.jpg | 2234     |
       | B         | http://fakeflicker/image_b.jpg  | 2345     |
      And I visit the admin page with the admin credentials
-    When I browse letter "A"
+    When I browse character "A"
     Then I should see saved images
       | Image                             |
       | http://fakeflicker/image_a1.jpg   |
@@ -44,7 +44,7 @@ Feature: Adding letters
       | B         | http://fakeflicker/saved_2.jpg  | 2345     |
       | B         | http://fakeflicker/saved_3.jpg  | 3456     |
      And I visit the admin page with the admin credentials
-    When I browse letter "B"
+    When I browse character "B"
     Then I should only see images from service
       | Image                                       | Saved |
       | http://fakeflicker/not_saved_1.jpg          | false |

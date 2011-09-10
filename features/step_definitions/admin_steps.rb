@@ -16,14 +16,14 @@ end
 
 # Browsing steps
 
-Then /^I can see a selection of all letters to browse$/ do
-  ("A".."Z").each do |letter| 
-    page.should have_link(letter, :href => "/admin/browse/#{letter.downcase}")
+Then /^I can see a selection of all characters to browse$/ do
+  ("A".."Z").each do |character| 
+    page.should have_link(character, :href => "/admin/browse/#{character.downcase}")
   end
 end
 
-When /^I browse letter "([^"]*)"$/ do |letter|
-  visit "/admin/browse/#{letter}"
+When /^I browse character "([^"]*)"$/ do |character|
+  visit "/admin/browse/#{character}"
 end
 
 When /^I go to the next page$/ do
