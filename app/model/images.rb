@@ -8,13 +8,15 @@ class Images
   end
   
   def self.save(image)
-    raise "Missing character" unless image.character
-    collection.save("character" => image.character, "image_url" => image.url, "image_id" => image.image_id)
+    require_character(image)
+    
+    collection.save(image.to_hash)
   end
 
   def self.remove(image)
-    raise "Missing character" unless image.character
-    collection.remove("character" => image.character, "image_url" => image.url, "image_id" => image.image_id)
+    require_character(image)
+
+    collection.remove(image.to_hash)
   end
 
   def self.saved?(image)
@@ -31,6 +33,10 @@ class Images
     raise "No underlying DB collection" unless @@collection
 
     return @@collection
+  end
+
+  def self.require_character(image)
+    raise "Missing character" unless image.character
   end
 
 end

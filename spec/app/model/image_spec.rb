@@ -29,8 +29,8 @@ describe "Image" do
   end
 
   it "should convert to hash representation" do
-    Image.new("id", "url", "char").to_hash.should == {:image_id => "id", :url => "url", :character => "char"}
-    Image.new("id", "url").to_hash.should == {:image_id => "id", :url => "url", :character => nil}
+    Image.new("id", "url", "char").to_hash.should == {:image_id => "id", :image_url => "url", :character => "char"}
+    Image.new("id", "url").to_hash.should == {:image_id => "id", :image_url => "url", :character => nil}
   end
 
   describe "(equality)" do
