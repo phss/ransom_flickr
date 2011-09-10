@@ -12,6 +12,11 @@ class Images
     collection.save("character" => image.character, "image_url" => image.url, "image_id" => image.image_id)
   end
 
+  def self.remove(image)
+    raise "Missing character" unless image.character
+    collection.remove("character" => image.character, "image_url" => image.url, "image_id" => image.image_id)
+  end
+
   def self.saved?(image)
     collection.find(:image_id => image.image_id).has_next?
   end

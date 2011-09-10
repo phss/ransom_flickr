@@ -1,19 +1,17 @@
-Feature: Adding letters
+Feature: Removing letters
   In order to allow users to generate notes
   As a site administrator
   I want to be able to remove saved letters I've added by mistake
 
   Scenario: Removing a letter
-    Given no saved entries
-     And an Image service with the following entries
-      | Character | Image                                       | Image ID |
-      | A         | http://fakeflicker/should_not_see_this.jpg  | 1234     |
-      | B         | http://fakeflicker/first_b_image.jpg        | 2345     |
-      | B         | http://fakeflicker/second_b_image.jpg       | 3456     |
+    Given the following saved entries
+      | character | image_url                       | image_id |
+      | A         | http://fakeflicker/image_a1.jpg | 1234     |
+      | A         | http://fakeflicker/image_a2.jpg | 2234     |
      And I visit the admin page with the admin credentials
-     And I browse letter "B"
-    When I click to save image "2345"
+     And I browse letter "A"
+    When I click to remove image "1234"
     Then I should see saved images
       | Image                                  |
-      | http://fakeflicker/first_b_image.jpg   |
-     And I should see status message "Successfully saved new image"
+      | http://fakeflicker/image_a1.jpg   |
+     And I should see status message "Successfully removed image"

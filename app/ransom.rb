@@ -49,6 +49,14 @@ get "/admin/save/:character/:image_id" do
   redirect link_with_pagination("/admin/browse/#{params[:character]}")
 end
 
+get "/admin/remove/:character/:image_id" do
+  protected!
+  
+  Images.remove(settings.image_service.find_image(params[:image_id]).with_character(params[:character]))
+  flash[:save_status] = "Successfully removed image"
+
+  redirect link_with_pagination("/admin/browse/#{params[:character]}")
+end
 
 # Stylesheet link
 get "/ransom.css" do

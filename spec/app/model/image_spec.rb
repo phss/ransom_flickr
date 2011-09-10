@@ -28,6 +28,11 @@ describe "Image" do
     image.image_id.should == "blah456"
   end
 
+  it "should convert to hash representation" do
+    Image.new("id", "url", "char").to_hash.should == {:image_id => "id", :url => "url", :character => "char"}
+    Image.new("id", "url").to_hash.should == {:image_id => "id", :url => "url", :character => nil}
+  end
+
   describe "(equality)" do
     it "should be equal to another object with same image_id" do
       image1 = Image.new("id", "a", "a")

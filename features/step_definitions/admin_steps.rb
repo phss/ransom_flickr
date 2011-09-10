@@ -57,7 +57,11 @@ def should_have_image_with_saved_highlight(category, link)
 end
 
 When /^I click to save image "([^"]*)"$/ do |image_id|
-  click_link("image_#{image_id}")
+  click_link("add_#{image_id}")
+end
+
+When /^I click to remove image "([^"]*)"$/ do |image_id|
+  click_link("remove_#{image_id}")
 end
 
 # External services step (i.e. image service and DB)

@@ -26,6 +26,26 @@ describe "Images" do
     end
   end
 
+  describe "(removing images)" do
+    it "should fail to remove image if has no underyling DB collection" do
+      expect { Images.remove(Image.new("id", "url", "a")) }.to raise_error(StandardError, "No underlying DB collection")
+    end  
+
+    it "should fail if image doesn't have a character" do
+      expect { Images.remove(Image.new("id", "url")) }.to raise_error(StandardError, "Missing character")
+    end
+
+    it "should remove image" do
+      saved_image = Image.new("some id", "some url", "x")
+      Images.db_collection = @mongo_collection
+      Images.save(saved_image)
+
+      Images.remove(saved_image)
+
+      @mongo_collection.find().has_next?.should be_false    
+    end
+  end
+
   describe "(finding images)" do
     it "should fail to find images if has no underyling DB collection" do
       expect { Images.find_for("a") }.to raise_error(StandardError, "No underlying DB collection")

@@ -9,7 +9,7 @@
       %h1 To Add
 
       - @to_add_images.each do |image|
-        %a{:id => "image_#{image.image_id}", :href => link_with_pagination("/admin/save/#{params[:character]}/#{image.image_id}")}
+        %a{:id => "add_#{image.image_id}", :href => link_with_pagination("/admin/save/#{params[:character]}/#{image.image_id}")}
           %img{:src => image.url, :class => Images.saved?(image) ? "image_saved" : ""}
 
       #paging
@@ -22,4 +22,5 @@
       #save_status= flash[:save_status]
 
       - @saved_images.each do |image|
-        %img{:src => image.url}        
+        %a{:id => "remove_#{image.image_id}", :href => link_with_pagination("/admin/remove/#{params[:character]}/#{image.image_id}")}
+          %img{:src => image.url}        

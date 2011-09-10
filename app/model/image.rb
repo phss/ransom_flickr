@@ -19,6 +19,10 @@ class Image
     self
   end
 
+  def to_hash
+    {:image_id => @image_id, :url => @url, :character => @character}
+  end
+
   def ==(another_image)
     @image_id == another_image.image_id
   end
