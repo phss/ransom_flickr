@@ -17,8 +17,12 @@ end
 # Browsing steps
 
 Then /^I can see a selection of all characters to browse$/ do
-  ("A".."Z").each do |character| 
-    page.should have_link(character, :href => "/admin/browse/#{character.downcase}")
+  ("A".."Z").each do |letter| 
+    page.should have_link(letter, :href => "/admin/browse/#{letter.downcase}")
+  end
+
+  (0..0).each do |number| 
+    page.should have_link(number.to_s, :href => "/admin/browse/#{number.to_s}")
   end
 end
 

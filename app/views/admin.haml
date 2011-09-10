@@ -3,6 +3,9 @@
 
   - ("a".."z").each do |letter|
     %a{:href => "/admin/browse/#{letter}"}= letter.upcase
+  %br
+  - (0..9).each do |number|
+    %a{:href => "/admin/browse/#{number}"}= number
 
   - if @to_add_images
     #to_add
