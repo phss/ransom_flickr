@@ -7,7 +7,7 @@ describe FlickrImageService do
     @service = FlickrImageService.new(@flickr_wrapper)
   end
 
-  it "should browse images from letter group for a given character" do
+  it "should browse images from letter group for a given letter character" do
     flickr_photos = [ photo("id1", "url1"), photo("id2", "url2"), photo("id3", "url3")]
 
     @flickr_wrapper.should_receive(:search).with(:tag => "a", :group => "One Letter", :page => 1) { flickr_photos }
@@ -16,6 +16,16 @@ describe FlickrImageService do
                                      Image.new("id2", "url2", "a"), 
                                      Image.new("id3", "url3", "a") ]
   end
+
+  it "should browse images from digit group for a given digit character" do
+    flickr_photos = [ photo("id1", "url1"), photo("id2", "url2"), photo("id3", "url3")]
+
+    @flickr_wrapper.should_receive(:search).with(:tag => "5", :group => "One Digit", :page => 1) { flickr_photos }
+
+    @service.browse("5").should == [ Image.new("id1", "url1", "5"), 
+                                     Image.new("id2", "url2", "5"), 
+                                     Image.new("id3", "url3", "5") ]
+  end  
 
   it "should browse images from a given page" do
     flickr_photos = [ photo("id", "url") ]
