@@ -14,4 +14,4 @@ Feature: Removing letters
     Then I should see saved images
       | Image                                  |
       | http://fakeflicker/image_a1.jpg   |
-     And I should see status message "Successfully removed image"
+     And I should see status message "Remove successful"

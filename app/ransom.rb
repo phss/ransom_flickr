@@ -40,20 +40,14 @@ get "/admin/browse/:character" do
   haml :admin
 end
 
-get "/admin/save/:character/:image_id" do
+get "/admin/:action/:character/:image_id" do
   protected!
-  
-  Images.save(settings.image_service.find_image(params[:image_id]).with_character(params[:character]))
-  flash[:save_status] = "Successfully saved new image"
 
-  redirect link_with_pagination("/admin/browse/#{params[:character]}")
-end
-
-get "/admin/remove/:character/:image_id" do
-  protected!
+  action = params[:action]
+  halt "Action #{action} not supported" unless ["save", "remove"].include?(action)
   
-  Images.remove(settings.image_service.find_image(params[:image_id]).with_character(params[:character]))
-  flash[:save_status] = "Successfully removed image"
+  Images.send(action, settings.image_service.find_image(params[:image_id]).with_character(params[:character]))
+  flash[:save_status] = "#{action.capitalize} successful"
 
   redirect link_with_pagination("/admin/browse/#{params[:character]}")
 end
