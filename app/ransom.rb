@@ -9,7 +9,7 @@ require_relative "model/image"
 require_relative "../lib/helpers"
 require_relative "../lib/flickr"
 
-helpers Authentication, Pagination
+helpers Authentication, Pagination, PartialRendering
 
 DB = Mongo::Connection.new.db("ransom")
 Images.db_collection = DB.collection("images")

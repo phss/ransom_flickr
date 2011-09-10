@@ -1,0 +1,3 @@
+- images.each do |image|
+  %a{:id => "#{action}_#{image.image_id}", :href => link_with_pagination("/admin/#{action}/#{params[:character]}/#{image.image_id}")}
+    %img{:src => image.url, :class => Images.saved?(image) ? "image_saved" : ""}

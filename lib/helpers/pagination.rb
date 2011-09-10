@@ -9,6 +9,6 @@ module Pagination
   end
 
   def render_pagination(base_url)
-    haml :pagination, :layout => false, :locals => { :base_url => base_url }
+    partial(:partial_pagination, :base_url => base_url)
   end
 end
