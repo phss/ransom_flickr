@@ -25,7 +25,19 @@ describe FlickrImageService do
     @service.browse("5").should == [ Image.new("id1", "url1", "5"), 
                                      Image.new("id2", "url2", "5"), 
                                      Image.new("id3", "url3", "5") ]
-  end  
+  end
+
+  Punctuation.list.each do |punctuation|
+    it "should browse images from punctuation group for a #{punctuation.symbol} character" do
+      flickr_photos = [ photo("id1", "url1"), photo("id2", "url2"), photo("id3", "url3")]
+
+      @flickr_wrapper.should_receive(:search).with(:tag => punctuation.name, :group => "Punctuation", :page => 1) { flickr_photos }
+
+      @service.browse(punctuation.name).should == [ Image.new("id1", "url1", punctuation.name), 
+                                                    Image.new("id2", "url2", punctuation.name), 
+                                                    Image.new("id3", "url3", punctuation.name) ]
+    end
+  end
 
   it "should browse images from a given page" do
     flickr_photos = [ photo("id", "url") ]

@@ -16,7 +16,9 @@ class FlickrImageService
   private
 
   def group_for(character)
-    if character.match(/[A-Za-z]/)
+    if Punctuation.match(character)
+      "Punctuation"
+    elsif character.match(/[A-Za-z]/)
       "One Letter"
     elsif character.match(/[0-9]/)
       "One Digit"

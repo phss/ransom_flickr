@@ -29,7 +29,7 @@ class FlickWrapper
 
   def tag_from(options)
     tag = options[:tag]
-    tag = "00" if tag == "0"
+    tag = "00" if tag == "0" # Not sure why, but 00 is the tag for 0
     return tag
   end
 

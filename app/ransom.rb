@@ -4,8 +4,8 @@ require "haml"
 require "sass"
 require "yaml"
 require "rack-flash"
-require_relative "model/images"
-require_relative "model/image"
+require "uri"
+require_relative "model"
 require_relative "../lib/helpers"
 require_relative "../lib/flickr"
 
@@ -49,7 +49,7 @@ get "/admin/:action/:character/:image_id" do
   Images.send(action, settings.image_service.find_image(params[:image_id]).with_character(params[:character]))
   flash[:save_status] = "#{action.capitalize} successful"
 
-  redirect link_with_pagination("/admin/browse/#{params[:character]}")
+  redirect link_with_pagination("/admin/browse/#{URI.escape(params[:character])}")
 end
 
 # Stylesheet link

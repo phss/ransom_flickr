@@ -24,6 +24,10 @@ Then /^I can see a selection of all characters to browse$/ do
   (0..0).each do |number| 
     page.should have_link(number.to_s, :href => "/admin/browse/#{number.to_s}")
   end
+
+  Punctuation.list.each do |punctuation| 
+    page.should have_link(punctuation.symbol, :href => "/admin/browse/#{punctuation.name}")
+  end
 end
 
 When /^I browse character "([^"]*)"$/ do |character|
