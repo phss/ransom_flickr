@@ -11,14 +11,16 @@ require_relative "../lib/flickr"
 
 helpers Authentication, Pagination, PartialRendering
 
-DB = Mongo::Connection.new.db("ransom")
-Images.db_collection = DB.collection("images")
-
-enable :sessions
-use Rack::Flash
-
 configure :production, :development do
   set :image_service, FlickrImageService.new(FlickWrapper.new(YAML.load_file("flickr_key.yaml")))
+end
+
+configure do
+  DB = Mongo::Connection.new.db("ransom-#{settings.environment}")
+  Images.db_collection = DB.collection("images")
+
+  enable :sessions
+  use Rack::Flash
 end
 
 get "/" do
