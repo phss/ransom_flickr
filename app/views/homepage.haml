@@ -1,9 +1,13 @@
 .write
   %p Want to blackmail your boss? What about declaring your love for that special one you are stalking? A regular prank or an unusual communication method? Say no more, write your own letter in the style of a ransom note:
 
-  %form
-    %textarea{:id => "note", :cols => 108, :rows => 20}
+  %form{:method => "post", :action => "/generate"}
+    %textarea{:id => "note", :name => "note", :cols => 108, :rows => 20}
     %br
     %button Generate
 
-.result
+- if @urls
+  .result
+    - @urls.each_with_index do |image, i|
+      %img{:id => "image_pos_#{i.to_s}", :src => image.url}
+      

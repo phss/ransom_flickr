@@ -13,7 +13,11 @@ class Punctuation
   end
 
   def self.match(character)
-    list.find { |punctuation| punctuation.name == character }
+    Punctuation.for(character) != nil
+  end
+
+  def self.for(character)
+    list.find { |punctuation| punctuation.name == character || punctuation.symbol == character }
   end
 
   private

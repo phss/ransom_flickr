@@ -20,7 +20,7 @@ Feature: Generating notes
       | period      | http://fakeflicker/per.jpg   | 10       |
       | exclamation | http://fakeflicker/excl.jpg  | 11       |
      And I visit the home page
-    When I enter a message "Hello. Test 1!"
+    When I enter a message "hello. Test 1!"
      And I click Generate
     Then I should see image urls in the following order
       | http://fakeflicker/h.jpg    |

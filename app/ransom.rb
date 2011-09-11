@@ -23,8 +23,24 @@ configure do
   use Rack::Flash
 end
 
+
+# Generating notes
 get "/" do
  haml :homepage
+end
+
+post "/generate" do
+  note = params[:note].gsub(" ", "").split("")
+
+  @urls = note.collect do |character|
+    if Punctuation.match(character)
+      Images.find_for(Punctuation.for(character).name).first
+    else
+      Images.find_for(character.downcase).first
+    end
+  end.compact
+
+  haml :homepage
 end
 
 # Admin routes
