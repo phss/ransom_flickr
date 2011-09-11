@@ -30,14 +30,17 @@ get "/" do
 end
 
 post "/generate" do
-  note = params[:note].gsub(" ", "").split("")
+  note_words = params[:note].downcase.split(/\s/)
 
-  @urls = note.collect do |character|
-    if Punctuation.match(character)
-      Images.find_for(Punctuation.for(character).name).first
-    else
-      Images.find_for(character.downcase).first
-    end
+  @words = note_words.collect do |word|
+    word.split("").inject([]) do |photo_word, character|
+      if Punctuation.match(character)
+        photo_word << Images.find_for(Punctuation.for(character).name).first
+      else
+        photo_word <<Images.find_for(character).first
+      end
+      photo_word
+    end.compact
   end.compact
 
   haml :homepage
