@@ -9,6 +9,7 @@
   %br
   - Punctuation.list.each do |punctuation|
     %a{:href => "/admin/browse/#{punctuation.name}"}= punctuation.symbol
+    
 
   - if @to_add_images
     #to_add
