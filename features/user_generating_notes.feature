@@ -35,3 +35,15 @@ Feature: Generating notes
       | http://fakeflicker/t.jpg    |
       | http://fakeflicker/one.jpg  |
       | http://fakeflicker/excl.jpg |
+
+  Scenario: Note with missing images
+    Given the following saved entries
+      | character   | image_url                    | image_id |
+      | h           | http://fakeflicker/h.jpg     | 1        |
+      | o           | http://fakeflicker/o.jpg     | 2        |
+     And I visit the home page
+    When I enter a message "hello"
+     And I click Generate
+    Then I should see image urls in the following order
+      | http://fakeflicker/h.jpg    |
+      | http://fakeflicker/o.jpg    |
