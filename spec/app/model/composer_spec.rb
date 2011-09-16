@@ -7,18 +7,31 @@ describe Composer do
     @composer = Composer.new(@images)
   end
 
-  it "should generate note with first image of each character" do
-    images_should_have "a" => [Image.new("a1", "a1"), Image.new("a2", "a2")],
-                       "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")],
-                       "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
+  describe "(single word)" do
+    it "should generate note with first image of each character" do
+      images_should_have "a" => [Image.new("a1", "a1"), Image.new("a2", "a2")],
+                         "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")],
+                         "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
-    @composer.generate("abc") == [Image.new("a1", "a1"), Image.new("b1", "b1"), Image.new("c1", "c1")]
+      @composer.generate("abc") == [Image.new("a1", "a1"), Image.new("b1", "b1"), Image.new("c1", "c1")]
+    end
+
+    it "should generate note ignoring case" do
+      images_should_have "a" => [Image.new("a1", "a1")]
+
+      @composer.generate("aA") == [Image.new("a1", "a1"), Image.new("a1", "a1")]
+    end
   end
 
-  it "should generate note ignoring case" do
-    images_should_have "a" => [Image.new("a1", "a1")]
+  describe "(punctuation)" do
+    Punctuation.list.each do |punctuation|
+      it "should generate note for #{punctuation.symbol} character" do
+        punctuation_image = Image.new(punctuation.name, punctuation.name)
+        images_should_have punctuation.name => [punctuation_image]
 
-    @composer.generate("aA") == [Image.new("a1", "a1"), Image.new("a1", "a1")]
+        @composer.generate(punctuation.symbol) == [punctuation_image]
+      end
+    end
   end
 
 
