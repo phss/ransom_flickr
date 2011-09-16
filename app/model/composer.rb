@@ -5,9 +5,11 @@ class Composer
   end
 
   def generate(note)
-    note.downcase.split("").inject([]) do |word, character|
-      word << first_image_for(character)
-    end.compact
+    note.downcase.split(/\s/).collect do |word|
+      word.split("").collect do |character|
+        first_image_for(character)
+      end.compact
+    end
   end
 
   private
