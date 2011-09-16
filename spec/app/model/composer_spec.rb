@@ -50,6 +50,14 @@ describe Composer do
 
       @composer.generate("a b c").should == [[Image.new("a1", "a1")], [Image.new("b1", "b1")], [Image.new("c1", "c1")]]
     end
+
+    it "should generate note with multiple words" do
+      images_should_have "a" => [Image.new("a1", "a1"), Image.new("a2", "a2")],
+                         "b" => [], # No images
+                         "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
+
+      @composer.generate("a b c").should == [[Image.new("a1", "a1")], [Image.new("c1", "c1")]]
+    end    
   end
 
 

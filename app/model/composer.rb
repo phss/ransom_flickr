@@ -9,7 +9,7 @@ class Composer
       word.split("").collect do |character|
         first_image_for(character)
       end.compact
-    end
+    end.reject { |word| word.empty? }
   end
 
   private

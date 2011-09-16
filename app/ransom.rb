@@ -30,18 +30,7 @@ get "/" do
 end
 
 post "/generate" do
-  note_words = params[:note].downcase.split(/\s/)
-
-  @words = note_words.collect do |word|
-    word.split("").inject([]) do |photo_word, character|
-      if Punctuation.match(character)
-        photo_word << Images.find_for(Punctuation.for(character).name).first
-      else
-        photo_word << Images.find_for(character).first
-      end
-      photo_word
-    end.compact
-  end.compact
+  @words = Composer.new(Images).generate(params[:note])
 
   haml :homepage
 end
