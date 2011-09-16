@@ -37,7 +37,7 @@ post "/generate" do
       if Punctuation.match(character)
         photo_word << Images.find_for(Punctuation.for(character).name).first
       else
-        photo_word <<Images.find_for(character).first
+        photo_word << Images.find_for(character).first
       end
       photo_word
     end.compact
