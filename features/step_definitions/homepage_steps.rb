@@ -15,7 +15,7 @@ When /^I click Generate$/ do
 end
 
 Then /^I should see image urls in the following order$/ do |table|
-  table.raw.flatten.each_with_index do |expected_url, i|
-    page.should have_xpath("//img[@id=\"image_pos_#{i.to_s}\" and @src=\"#{expected_url}\"]")
+  table.hashes.each do |attr| 
+    page.should have_xpath("//img[@id=\"image_pos_#{attr[:position]}\" and @src=\"#{attr[:url]}\"]")
   end
 end

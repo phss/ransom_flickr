@@ -8,11 +8,9 @@
 
 - if @words
   .result
-    - i = 0
-    - @words.each do |word|
+    - @words.each_with_index do |word, i|
       %span#word
-        - word.each do |image|
-          %img{:id => "image_pos_#{i.to_s}",:src => image.url}
-          - i += 1
+        - word.each_with_index do |image, j|
+          %img{:id => "image_pos_#{i}_#{j}",:src => image.url}
       %span#space
       

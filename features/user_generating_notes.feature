@@ -23,18 +23,19 @@ Feature: Generating notes
     When I enter a message "hello. Test 1!"
      And I click Generate
     Then I should see image urls in the following order
-      | http://fakeflicker/h.jpg    |
-      | http://fakeflicker/e.jpg    |
-      | http://fakeflicker/l.jpg    |
-      | http://fakeflicker/l.jpg    |
-      | http://fakeflicker/o.jpg    |
-      | http://fakeflicker/per.jpg  |
-      | http://fakeflicker/t.jpg    |
-      | http://fakeflicker/e.jpg    |
-      | http://fakeflicker/s.jpg    |
-      | http://fakeflicker/t.jpg    |
-      | http://fakeflicker/one.jpg  |
-      | http://fakeflicker/excl.jpg |
+      | url                         | position |
+      | http://fakeflicker/h.jpg    | 0_0      |
+      | http://fakeflicker/e.jpg    | 0_1      |
+      | http://fakeflicker/l.jpg    | 0_2      |
+      | http://fakeflicker/l.jpg    | 0_3      |
+      | http://fakeflicker/o.jpg    | 0_4      |
+      | http://fakeflicker/per.jpg  | 0_5      |
+      | http://fakeflicker/t.jpg    | 1_0      |
+      | http://fakeflicker/e.jpg    | 1_1      |
+      | http://fakeflicker/s.jpg    | 1_2      |
+      | http://fakeflicker/t.jpg    | 1_3      |
+      | http://fakeflicker/one.jpg  | 2_0      |
+      | http://fakeflicker/excl.jpg | 2_1      |
 
   Scenario: Note with missing images
     Given the following saved entries
@@ -45,5 +46,6 @@ Feature: Generating notes
     When I enter a message "hello"
      And I click Generate
     Then I should see image urls in the following order
-      | http://fakeflicker/h.jpg    |
-      | http://fakeflicker/o.jpg    |
+      | url                         | position |
+      | http://fakeflicker/h.jpg    | 0_0      |
+      | http://fakeflicker/o.jpg    | 0_1      |
