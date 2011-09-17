@@ -10,13 +10,14 @@ class Composer
     current_word = []
 
     note.downcase.split("").each do |character|
-      if (character.match(/\s/))
+      if (character.match(/\s/) || character == "\n")
         unless current_word.empty?
           elements << word(current_word).at(word_count)
           current_word = []
           word_count += 1
         end
-        elements << space
+        elements << space if character == " "
+        elements << line_break if character == "\n"
       else
         image = first_image_for(character)
         current_word << image.url unless image.nil?
@@ -49,6 +50,10 @@ class Composer
 
   def space
     Element.space
+  end
+
+  def line_break
+    Element.break
   end
 
 end
