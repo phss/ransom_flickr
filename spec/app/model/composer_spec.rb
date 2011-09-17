@@ -13,13 +13,13 @@ describe Composer do
                          "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")],
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
-      @composer.generate2("abc").should == note_with(word("a1", "b1", "c1"))
+      @composer.generate("abc").should == note_with(word("a1", "b1", "c1").at(0))
     end
 
     it "should generate note ignoring case" do
       images_should_have "a" => [Image.new("a1", "a1")]
 
-      @composer.generate("aA").should == [[Image.new("a1", "a1"), Image.new("a1", "a1")]]
+      @composer.pre_generate("aA").should == [[Image.new("a1", "a1"), Image.new("a1", "a1")]]
     end
 
     it "should ignore characters where no image is available" do
@@ -27,7 +27,7 @@ describe Composer do
                          "b" => [] # No image
 
 
-      @composer.generate("aba").should == [[Image.new("a1", "a1"), Image.new("a1", "a1")]]
+      @composer.pre_generate("aba").should == [[Image.new("a1", "a1"), Image.new("a1", "a1")]]
     end
   end
 
@@ -37,7 +37,7 @@ describe Composer do
         punctuation_image = Image.new(punctuation.name, punctuation.name)
         images_should_have punctuation.name => [punctuation_image]
 
-        @composer.generate(punctuation.symbol).should == [[punctuation_image]]
+        @composer.pre_generate(punctuation.symbol).should == [[punctuation_image]]
       end
     end
   end
@@ -48,7 +48,7 @@ describe Composer do
                          "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")],
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
-      @composer.generate("a b c").should == [[Image.new("a1", "a1")], [Image.new("b1", "b1")], [Image.new("c1", "c1")]]
+      @composer.pre_generate("a b c").should == [[Image.new("a1", "a1")], [Image.new("b1", "b1")], [Image.new("c1", "c1")]]
     end
 
     it "should generate note with multiple words" do
@@ -56,7 +56,7 @@ describe Composer do
                          "b" => [], # No images
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
-      @composer.generate("a b c").should == [[Image.new("a1", "a1")], [Image.new("c1", "c1")]]
+      @composer.pre_generate("a b c").should == [[Image.new("a1", "a1")], [Image.new("c1", "c1")]]
     end    
   end
 

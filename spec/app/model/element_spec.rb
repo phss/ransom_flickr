@@ -28,6 +28,14 @@ describe Element do
     it "should not be equal when elements don't match and types do match" do
       Element.new(:blah, [1, 2, 3]).should_not == Element.new(:blah, [4, 5])
     end
+
+    it "should be equal when types and position match" do
+      Element.new(:blah).at(2).should == Element.new(:blah).at(2)
+    end
+
+    it "should not be equal when position don't match and types do match" do
+      Element.new(:blah).at(2).should_not == Element.new(:blah).at(20)
+    end
   end
 
 end

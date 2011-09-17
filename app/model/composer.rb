@@ -4,7 +4,7 @@ class Composer
     @images = images
   end
 
-  def generate(note)
+  def pre_generate(note)
     note.downcase.split(/\s/).collect do |word|
       word.split("").collect do |character|
         first_image_for(character)
@@ -12,9 +12,9 @@ class Composer
     end.reject { |word| word.empty? }
   end
 
-  def generate2(note)
-    first_word = generate(note).first
-    note(word(first_word.collect { |image| image.url}))
+  def generate(note)
+    first_word = pre_generate(note).first
+    note(word(first_word.collect { |image| image.url}).at(0))
   end
 
   private
