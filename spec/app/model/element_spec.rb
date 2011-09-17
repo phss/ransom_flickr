@@ -10,6 +10,14 @@ describe Element do
     it "should construct word" do
       Element.word_with([1, 2, 3]).should == Element.new(:word, [1, 2, 3])
     end
+
+    it "should construct space" do
+      Element.space.should == Element.new(:space)
+    end
+
+    it "should construct line break" do
+      Element.break.should == Element.new(:break)
+    end
   end
 
   describe "(equality)" do

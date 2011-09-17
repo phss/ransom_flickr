@@ -30,7 +30,7 @@ get "/" do
 end
 
 post "/generate" do
-  @words = Composer.new(Images).pre_generate(params[:note])
+  @image_note = Composer.new(Images).generate(params[:note])
 
   haml :homepage
 end

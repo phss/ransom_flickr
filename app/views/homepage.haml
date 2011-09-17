@@ -6,11 +6,14 @@
     %br
     %button Generate
 
-- if @words
+- if @image_note
   .result
-    - @words.each_with_index do |word, i|
-      %span#word
-        - word.each_with_index do |image, j|
-          %img{:id => "image_pos_#{i}_#{j}",:src => image.url}
-      %span#space
+    - @image_note.elements.each do |elem|
+      -case elem.type
+      -when :word
+        %span#word
+          - elem.elements.each_with_index do |url, i|
+            %img{:id => "image_pos_#{elem.position}_#{i}",:src => url}
+      -when :space
+        %span#space
       

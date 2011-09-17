@@ -14,8 +14,17 @@ class Element
     Element.new(:word, urls)
   end
 
+  def self.space
+    Element.new(:space)
+  end
+
+  def self.break
+    Element.new(:break)
+  end
+
   def at(position)
     @position = position
+    self
   end
 
   def ==(another_element)
