@@ -6,23 +6,33 @@ class Composer
 
   def generate(note)
     elements = []
-    pre_generate(note).each_with_index do |images, i|
-      elements << word(images.collect { |image| image.url}).at(i)
-      elements << space
+    word_count = 0
+    current_word = []
+
+    note.downcase.split("").each do |character|
+      if (character.match(/\s/))
+        unless current_word.empty?
+          elements << word(current_word).at(word_count)
+          current_word = []
+          word_count += 1
+        end
+        elements << space
+      else
+        image = first_image_for(character)
+        current_word << image.url unless image.nil?
+      end
     end
-    elements.pop
+
+    unless current_word.empty?
+      elements << word(current_word).at(word_count)
+      current_word = []
+      word_count += 1
+    end
+
     note(elements)
   end
 
   private
-
-  def pre_generate(note)
-    note.downcase.split(/\s/).collect do |word|
-      word.split("").collect do |character|
-        first_image_for(character)
-      end.compact
-    end.reject { |word| word.empty? }
-  end
 
   def first_image_for(character)
     character = Punctuation.match(character) ? Punctuation.for(character).name : character
