@@ -14,8 +14,7 @@ class Composer
 
   def generate2(note)
     first_word = generate(note).first
-    word = Element.new(:word, first_word.collect { |image| image.url})
-    Element.new(:note, [word])
+    note(word(first_word.collect { |image| image.url}))
   end
 
   private
@@ -23,6 +22,14 @@ class Composer
   def first_image_for(character)
     character = Punctuation.match(character) ? Punctuation.for(character).name : character
     @images.find_for(character).first
+  end
+
+  def note(*elements)
+    Element.note_with(elements)
+  end
+
+  def word(urls)
+    Element.word_with(urls)
   end
 
 end

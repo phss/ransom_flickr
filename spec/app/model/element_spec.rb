@@ -2,6 +2,16 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 describe Element do
 
+  describe "(constructors)" do
+    it "should construct note" do
+      Element.note_with([1, 2, 3]).should == Element.new(:note, [1, 2, 3])
+    end
+
+    it "should construct word" do
+      Element.word_with([1, 2, 3]).should == Element.new(:word, [1, 2, 3])
+    end
+  end
+
   describe "(equality)" do
     it "should be equal when there are no elements and types match" do
       Element.new(:blah).should == Element.new(:blah)

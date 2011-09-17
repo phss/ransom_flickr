@@ -13,8 +13,7 @@ describe Composer do
                          "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")],
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
-      @composer.generate("abc").should == [[Image.new("a1", "a1"), Image.new("b1", "b1"), Image.new("c1", "c1")]]
-      @composer.generate2("abc").should == Element.new(:note, [Element.new(:word, ["a1", "b1", "c1"])])
+      @composer.generate2("abc").should == note_with(word("a1", "b1", "c1"))
     end
 
     it "should generate note ignoring case" do
@@ -66,6 +65,14 @@ describe Composer do
     expected_image_map.each do |character, expected_results|
       @images.stub(:find_for).with(character).and_return(expected_results)
     end
+  end
+
+  def note_with(*elements)
+    Element.note_with(elements)
+  end
+
+  def word(*urls)
+    Element.word_with(urls)
   end
 
 end
