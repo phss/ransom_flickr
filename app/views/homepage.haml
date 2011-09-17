@@ -2,7 +2,7 @@
   %p Want to blackmail your boss? What about declaring your love for that special one you are stalking? A regular prank or an unusual communication method? Say no more, write your own letter in the style of a ransom note:
 
   %form{:method => "post", :action => "/generate"}
-    %textarea{:id => "note", :name => "note", :cols => 108, :rows => 20}= params[:note] 
+    %textarea{:id => "note", :name => "note", :cols => 108, :rows => 10}= params[:note] 
     %br
     %button Generate
 
@@ -13,7 +13,7 @@
       -when :word
         %span#word
           - elem.elements.each_with_index do |url, i|
-            %img{:id => "image_pos_#{elem.position}_#{i}",:src => url}
+            %img{:id => "image_pos_#{elem.position}_#{i}",:src => url, :style => random_style}
       -when :space
         %span#space
       -when :break

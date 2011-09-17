@@ -9,7 +9,7 @@ require_relative "model"
 require_relative "../lib/helpers"
 require_relative "../lib/flickr"
 
-helpers Authentication, Pagination, PartialRendering
+helpers Authentication, Pagination, PartialRendering, ImageStyle 
 
 configure :production, :development do
   set :image_service, FlickrImageService.new(FlickWrapper.new(YAML.load_file("flickr_key.yaml")))
