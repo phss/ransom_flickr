@@ -14,7 +14,7 @@ describe Composer do
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
       @composer.generate("abc").should == [[Image.new("a1", "a1"), Image.new("b1", "b1"), Image.new("c1", "c1")]]
-      # @composer.generate2("abc").should be_note_with(word("a1", "b1", "c1"), space(), line)
+      @composer.generate2("abc").should == Element.new(:note, [Element.new(:word, ["a1", "b1", "c1"])])
     end
 
     it "should generate note ignoring case" do
@@ -65,12 +65,6 @@ describe Composer do
   def images_should_have(expected_image_map)
     expected_image_map.each do |character, expected_results|
       @images.stub(:find_for).with(character).and_return(expected_results)
-    end
-  end
-
-  RSpec::Matchers.define :be_note_with do |expected_elements|
-    match do |actual_note|
-      actual_note.elements == expected_elements
     end
   end
 

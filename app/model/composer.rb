@@ -12,6 +12,12 @@ class Composer
     end.reject { |word| word.empty? }
   end
 
+  def generate2(note)
+    first_word = generate(note).first
+    word = Element.new(:word, first_word.collect { |image| image.url})
+    Element.new(:note, [word])
+  end
+
   private
 
   def first_image_for(character)
