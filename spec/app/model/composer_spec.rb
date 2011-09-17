@@ -56,7 +56,7 @@ describe Composer do
                          "b" => [], # No images
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
-      @composer.generate("a b c").should == note_with(word("a1").at(0), space, space, word("c1").at(1))
+      @composer.generate("a b c").should == note_with(word("a1").at(0), space, word("c1").at(1))
     end    
   end
 

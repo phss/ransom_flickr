@@ -6,34 +6,32 @@ class Composer
 
   def generate(note)
     elements = []
-    word_count = 0
-    current_word = []
+    word_count = -1
 
-    note.downcase.split("").each do |character|
-      if (character.match(/\s/) || character == "\n")
-        unless current_word.empty?
-          elements << word(current_word).at(word_count)
-          current_word = []
-          word_count += 1
-        end
-        elements << space if character == " "
-        elements << line_break if character == "\n"
-      else
-        image = first_image_for(character)
-        current_word << image.url unless image.nil?
+    partition(note).each do |line|
+      line.each do |images|
+        elements << word(images.collect { |image| image.url }).at(word_count += 1)
+        elements << space
       end
+      elements.pop # Remove extra space from last element
+      elements << line_break
     end
 
-    unless current_word.empty?
-      elements << word(current_word).at(word_count)
-      current_word = []
-      word_count += 1
-    end
-
+    elements.pop # Remove extra line break from last element
     note(elements)
   end
 
   private
+
+  def partition(note)
+    note.downcase.split("\n").collect do |line|
+      line.split(/\s/).collect do |word|
+        word.split("").collect do |character|
+          first_image_for(character)      
+        end.compact
+      end.reject { |item| item.empty? }
+    end.reject { |item| item.empty? }
+  end
 
   def first_image_for(character)
     character = Punctuation.match(character) ? Punctuation.for(character).name : character
