@@ -5,15 +5,16 @@ describe Composer do
   before do
     @images = double("Flickr Wrapper")
     @composer = Composer.new(@images)
+    srand(42) # Sets seed as the to have predictable results
   end
 
   describe "(single word)" do
-    it "should generate note with first image of each character" do
+    it "should generate note with random image of each character" do
       images_should_have "a" => [Image.new("a1", "a1"), Image.new("a2", "a2")],
                          "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")],
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
-      @composer.generate("abc").should == note_with(word("a1", "b1", "c1").at(0))
+      @composer.generate("abc").should == note_with(word("a1", "b2", "c2").at(0))
     end
 
     it "should generate note ignoring case" do
@@ -29,6 +30,13 @@ describe Composer do
 
       @composer.generate("aba").should == note_with(word("a1", "a1").at(0))
     end
+
+    it "should rotate character's images when multiples occurences" do
+      images_should_have "a" => [Image.new("a1", "a1"), Image.new("a2", "a2")],
+                         "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")]
+
+      @composer.generate("aaabb").should == note_with(word("a1", "a2", "a1", "b2", "b1").at(0))
+    end    
   end
 
   describe "(punctuation)" do
@@ -48,7 +56,7 @@ describe Composer do
                          "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")],
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
       
-      @composer.generate("a b c").should == note_with(word("a1").at(0), space, word("b1").at(1), space, word("c1").at(2))
+      @composer.generate("a b c").should == note_with(word("a1").at(0), space, word("b2").at(1), space, word("c2").at(2))
     end
 
     it "should generate note with multiple words" do
@@ -56,7 +64,7 @@ describe Composer do
                          "b" => [], # No images
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
 
-      @composer.generate("a b c").should == note_with(word("a1").at(0), space, word("c1").at(1))
+      @composer.generate("a b c").should == note_with(word("a1").at(0), space, word("c2").at(1))
     end    
   end
 
@@ -66,7 +74,7 @@ describe Composer do
                          "b" => [Image.new("b1", "b1"), Image.new("b2", "b2")],
                          "c" => [Image.new("c1", "c1"), Image.new("c2", "c2")]
       
-      @composer.generate("a\nb\nc").should == note_with(word("a1").at(0), line_break, word("b1").at(1), line_break, word("c1").at(2))      
+      @composer.generate("a\nb\nc").should == note_with(word("a1").at(0), line_break, word("b2").at(1), line_break, word("c2").at(2))      
     end
   end
 

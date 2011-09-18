@@ -20,6 +20,11 @@ class Punctuation
     list.find { |punctuation| punctuation.name == character || punctuation.symbol == character }
   end
 
+  # Returns a punctuation name, if it's a punctiation symbolr, or the supplied character otherwise.
+  def self.or(character)
+    Punctuation.match(character) ? Punctuation.for(character).name : character
+  end
+
   private
 
   def initialize(symbol, name)
