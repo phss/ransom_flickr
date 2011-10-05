@@ -19,3 +19,11 @@ Then /^I should see image urls in the following order$/ do |table|
     page.should have_xpath("//img[@id=\"image_pos_#{attr[:position]}\" and @src=\"#{attr[:url]}\"]")
   end
 end
+
+Then /^I should not see the Save button$/ do
+  page.should_not have_button "Save"
+end
+
+Then /^I should see the Save button$/ do
+  page.should have_button "Save"
+end

@@ -5,6 +5,8 @@
     %textarea{:id => "note", :name => "note", :cols => 108, :rows => 10}= params[:note] 
     %br
     %button Generate
+    - if @image_note
+      %button Save
 
 - if @image_note
   .result
