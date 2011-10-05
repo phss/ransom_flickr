@@ -27,3 +27,12 @@ end
 Then /^I should see the Save button$/ do
   page.should have_button "Save"
 end
+
+When /^I click Save$/ do
+  pending
+  click_on("Save")
+end
+
+When /^I view note with key "([^"]*)"$/ do |key|
+  visit "/note/#{key}"
+end

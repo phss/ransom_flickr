@@ -1,0 +1,13 @@
+- if @image_note
+  .result
+    - @image_note.elements.each do |elem|
+      -case elem.type
+      -when :word
+        %span#word
+          - elem.elements.each_with_index do |url, i|
+            %img{:id => "image_pos_#{elem.position}_#{i}",:src => url, :style => random_style}
+      -when :space
+        %span#space
+      -when :break
+        #break
+      

@@ -35,6 +35,18 @@ post "/generate" do
   haml :homepage
 end
 
+post "/save" do
+  saved_note = Notes.save(params[:note])
+
+  redirect "/note/#{saved_note.key}"
+end
+
+get "/note/:key" do
+  @image_note = Composer.new(Images).generate(DB.collection("notes").find_one("key" => params[:key])["note"])
+
+  haml :note
+end
+
 # Admin routes
 get "/admin" do
   protected!

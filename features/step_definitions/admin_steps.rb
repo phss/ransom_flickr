@@ -86,3 +86,8 @@ Given /^the following saved entries$/ do |table|
   DB.collection("images").remove()
   table.hashes.each { |image| DB.collection("images").save(image) }
 end
+
+Given /^the note "([^"]*)" with key "([^"]*)"$/ do |note, key|
+  DB.collection("notes").remove()
+  DB.collection("notes").save({"key" => key, "note" => note})
+end
