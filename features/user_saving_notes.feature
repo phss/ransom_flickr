@@ -45,4 +45,9 @@ Feature: Saving notes
       | url                         | position |
       | http://fakeflicker/a.jpg    | 0_0      |
       | http://fakeflicker/b.jpg    | 0_1      |
-      | http://fakeflicker/c.jpg    | 0_2      |      
+      | http://fakeflicker/c.jpg    | 0_2      |
+
+  Scenario: No note for key
+    Given the note "abc" with key "blah123"
+    When I view note with key "nonote"
+    Then I should see status message "Note for key 'nonote' doesn't exist."

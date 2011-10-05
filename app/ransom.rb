@@ -42,7 +42,10 @@ post "/save" do
 end
 
 get "/note/:key" do
-  @image_note = Composer.new(Images).generate(DB.collection("notes").find_one("key" => params[:key])["note"])
+  saved_note = DB.collection("notes").find_one("key" => params[:key])
+  return "Note for key '#{params[:key]}' doesn't exist." unless saved_note
+  
+  @image_note = Composer.new(Images).generate(saved_note["note"])
 
   haml :note
 end
