@@ -18,8 +18,7 @@ end
 configure do
   DB = Mongo::Connection.new.db("ransom-#{settings.environment}")
   Images.db_collection = DB.collection("images")
-  Notes.db_collection = DB.collection("notes")
-  Notes.key_generator = Base62KeyGenerator.new(DB.collection("sequences"), "key", 300779)
+  Notes = NoteRepository.new(DB.collection("notes"), Base62KeyGenerator.new(DB.collection("sequences"), "key", 300779))
 
   enable :sessions
   use Rack::Flash
