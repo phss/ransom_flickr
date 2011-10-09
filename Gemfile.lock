@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    base62 (0.1.4)
     bson (1.3.1)
     bson_ext (1.3.1)
     builder (3.0.0)
@@ -65,6 +66,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  base62
   bson_ext
   capybara
   cucumber

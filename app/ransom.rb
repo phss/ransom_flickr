@@ -18,6 +18,8 @@ end
 configure do
   DB = Mongo::Connection.new.db("ransom-#{settings.environment}")
   Images.db_collection = DB.collection("images")
+  Notes.db_collection = DB.collection("notes")
+  Notes.key_generator = Base62KeyGenerator.new(DB.collection("sequences"), "key", 300779)
 
   enable :sessions
   use Rack::Flash
@@ -38,7 +40,9 @@ end
 post "/save" do
   saved_note = Notes.save(params[:note])
 
-  redirect "/note/#{saved_note.key}"
+  flash[:save_status] = "Note saved. Copy the url and send it to your 'friends'."
+
+  redirect "/note/#{saved_note["key"]}"
 end
 
 get "/note/:key" do

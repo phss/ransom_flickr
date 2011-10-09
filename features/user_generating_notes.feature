@@ -7,6 +7,7 @@ Feature: Generating notes
     Given I visit the home page
     Then I should see the text area to enter the note
 
+  @javascript
   Scenario: Generating note
     Given the following saved entries
       | character   | image_url                    | image_id |
@@ -37,6 +38,7 @@ Feature: Generating notes
       | http://fakeflicker/one.jpg  | 2_0      |
       | http://fakeflicker/excl.jpg | 2_1      |
 
+  @javascript
   Scenario: Note with missing images
     Given the following saved entries
       | character   | image_url                    | image_id |

@@ -7,6 +7,7 @@ Feature: Saving notes
     When I visit the home page
     Then I should not see the Save button
 
+  @javascript
   Scenario: Showing the save button
     Given the following saved entries
       | character   | image_url                    | image_id |
@@ -16,6 +17,7 @@ Feature: Saving notes
      And I click Generate
     Then I should see the Save button
 
+  @javascript
   Scenario: Saving note
     Given the following saved entries
       | character   | image_url                    | image_id |

@@ -1,11 +1,11 @@
 .write
   %p Want to blackmail your boss? What about declaring your love for that special one you are stalking? A regular prank or an unusual communication method? Say no more, write your own letter in the style of a ransom note:
 
-  %form{:method => "post", :action => "/generate"}
+  %form{:name => "noteForm", :method => "post"}
     %textarea{:id => "note", :name => "note", :cols => 108, :rows => 10}= params[:note] 
     %br
-    %button Generate
+    %button{:onclick => "document.noteForm.action='/generate'"} Generate
     - if @image_note
-      %button Save
+      %button{:onclick => "document.noteForm.action='/save'"} Save
 
 = partial(:partial_note)

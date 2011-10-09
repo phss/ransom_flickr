@@ -29,7 +29,6 @@ Then /^I should see the Save button$/ do
 end
 
 When /^I click Save$/ do
-  pending
   click_on("Save")
 end
 

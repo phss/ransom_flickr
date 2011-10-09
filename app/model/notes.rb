@@ -14,7 +14,8 @@ class Notes
 
   def self.save(note)
     raise "No key generator" unless @@key_generator
-    collection.save("key" => @@key_generator.next_key, "note" => note)
+    id = collection.save("key" => @@key_generator.next, "note" => note)
+    collection.find_one("_id" => id)
   end
 
   private

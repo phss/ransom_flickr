@@ -24,7 +24,7 @@ describe "Notes" do
     it "should save note with generated key" do
       Notes.db_collection = @mongo_collection
       Notes.key_generator = @generator
-      @generator.should_receive(:next_key).and_return("abc123")
+      @generator.should_receive(:next).and_return("abc123")
 
       Notes.save("some note text")
 
