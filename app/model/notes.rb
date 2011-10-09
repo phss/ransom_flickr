@@ -2,13 +2,19 @@ require "mongo"
 
 class Notes
   @@collection = nil
+  @@key_generator = nil
 
   def self.db_collection=(collection)
     @@collection = collection
   end
 
+  def self.key_generator=(generator)
+    @@key_generator = generator
+  end
+
   def self.save(note)
-    collection.save("key" => "aaa", "note" => note)
+    raise "No key generator" unless @@key_generator
+    collection.save("key" => @@key_generator.next_key, "note" => note)
   end
 
   private
