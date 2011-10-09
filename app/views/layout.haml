@@ -2,11 +2,23 @@
   %head
     %title Ransom Flickr
     %meta{"http-equiv" => "Content-Type", :content=>"text/html; charset=UTF-8"}
-    %link{:rel => "stylesheet", :type => "text/css", :href => "/ransom.css" }  
-
+    %link{:rel => "stylesheet", :type => "text/css", :href => "/ransom.css" } 
+    %script{:type => "text/javascript", :src => "https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js" }
+    
   %body
     .header
       %a{:href => "/"}
         %img{:src => "/images/logo.png", :alt => "Make your own ransom note"}
     
     = yield
+
+    .footer
+      %a{:onclick => "$('about').toggle(); return false;", :href => "#"} About
+
+      #about{:style => "display:none;"}
+        All images are under the <a href='http://creativecommons.org/'>Creative Commons license</a> from <a href='http://www.flickr.com/groups/oneletter/'>one letter</a>, <a href='http://www.flickr.com/groups/onedigit/'>one digit</a> and <a href='http://www.flickr.com/groups/punctuation/'>punctuation</a> Flickr groups.
+        %br
+        The source code can be found in <a href='https://github.com/moonpxi/ransom_flickr'>github</a>. Feel free to contact <a href='mailto:paulo.schneider@gmail.com?Subject=Ransom%20Note'>me</a> in case of questions.
+        %br
+        Also, I don't condone blackmails and actual ransom notes, just so we are clear.
+        %br
