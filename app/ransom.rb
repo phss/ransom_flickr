@@ -9,8 +9,6 @@ require_relative "model"
 require_relative "../lib/helpers"
 require_relative "../lib/flickr"
 
-helpers Authentication, Pagination, PartialRendering, ImageStyle 
-
 configure :production, :development do
   set :image_service, FlickrImageService.new(FlickWrapper.new(YAML.load_file("flickr_key.yaml")))
 end
@@ -24,6 +22,11 @@ configure do
   use Rack::Flash
 end
 
+helpers Authentication, Pagination, PartialRendering, ImageStyle do
+  def compose(note)
+    Composer.new(Images).generate(note)
+  end
+end
 
 # Generating notes
 get "/" do
@@ -31,7 +34,7 @@ get "/" do
 end
 
 post "/generate" do
-  @image_note = Composer.new(Images).generate(params[:note])
+  @image_note = compose(params[:note])
 
   haml :homepage
 end
@@ -45,10 +48,10 @@ post "/save" do
 end
 
 get "/note/:key" do
-  saved_note = DB.collection("notes").find_one("key" => params[:key])
+  saved_note = Notes.find_by_key(params[:key])
   return "Note for key '#{params[:key]}' doesn't exist." unless saved_note
   
-  @image_note = Composer.new(Images).generate(saved_note["note"])
+  @image_note = compose(saved_note["note"])
 
   haml :note
 end

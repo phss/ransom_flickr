@@ -11,5 +11,9 @@ class NoteRepository
     @collection.save(note)
     return note
   end
+
+  def find_by_key(key)
+    @collection.find_one("key" => key)
+  end
   
 end
