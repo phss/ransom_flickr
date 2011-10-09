@@ -8,14 +8,14 @@ class Notes
     @@collection = collection
   end
 
-  def self.key_generator=(generator)
-    @@key_generator = generator
+  def self.key_generator=(key_generator)
+    @@key_generator = key_generator
   end
 
-  def self.save(note)
-    raise "No key generator" unless @@key_generator
-    id = collection.save("key" => @@key_generator.next, "note" => note)
-    collection.find_one("_id" => id)
+  def self.save(note_text)
+    note = {"key" => generator.next, "note" => note_text}
+    collection.save(note)
+    return note
   end
 
   private
@@ -24,6 +24,12 @@ class Notes
     raise "No underlying DB collection" unless @@collection
 
     return @@collection
+  end
+
+  def self.generator
+    raise "No key generator" unless @@key_generator
+
+    @@key_generator
   end
   
 end

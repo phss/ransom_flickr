@@ -13,6 +13,7 @@ describe "Notes" do
   describe "(saving notes)" do
     it "should fail to save note if has no underyling DB collection" do
       Notes.key_generator = @generator
+      @generator.should_receive(:next).and_return("abc123")
       expect { Notes.save("blah") }.to raise_error(StandardError, "No underlying DB collection")
     end  
 
