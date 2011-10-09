@@ -17,7 +17,7 @@ end
 
 configure do
   DB = Mongo::Connection.new.db("ransom-#{settings.environment}")
-  Images.db_collection = DB.collection("images")
+  Images = ImageRepository.new(DB.collection("images"))
   Notes = NoteRepository.new(DB.collection("notes"), Base62KeyGenerator.new(DB.collection("sequences"), "key", 300779))
 
   enable :sessions
