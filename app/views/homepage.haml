@@ -4,8 +4,8 @@
   %form{:name => "noteForm", :method => "post"}
     %textarea{:id => "note", :name => "note", :cols => 108, :rows => 10}= params[:note] 
     %br
-    %button{:onclick => "document.noteForm.action='/generate'"} Generate
+    %input{:type => "submit", :value => "Generate", :onclick => "document.noteForm.action='/generate'"}
     - if @image_note
-      %button{:onclick => "document.noteForm.action='/save'"} Save
+      %input{:type => "submit", :value => "Save", :onclick => "document.noteForm.action='/save'"}
 
 = partial(:partial_note)
